@@ -1,0 +1,291 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+
+
+<div class="body-inner">
+
+
+	<!-- Header start -->
+	<header id="header" class="fixed-top header" role="banner">
+		<!-- <a class="navbar-brand navbar-bg" href=""><img class="img-fluid float-right" src="img/favicon/logo.png" alt="logo"></a> -->
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="navbar navbar-expand-lg navbar-dark">
+						<a class="navbar-brand navbar-bg" href=""><img class="img-fluid float-right" src="~/assets/public/img/favicon/logo.png" alt="logo"></a>
+						<button class="navbar-toggler ml-auto border-0 rounded-0 text-white" type="button" data-toggle="collapse"
+								data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="fa fa-bars"></span>
+						</button>
+
+						<div class="collapse navbar-collapse text-center" id="navigation">
+							<ul class="navbar-nav ml-auto">
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("","Home")">Home</a></a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("About")">About Us</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("Service")">Services</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("Career")">Career</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("Contact")">Contact</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!--/ Header end -->
+
+	<div id="banner-area">
+		<img src="~/assets/public/images/banner/banner1.jpg" alt="" />
+		<div class="parallax-overlay"></div>
+		<!-- Subpage title start -->
+		<div class="banner-title-content">
+			<div class="text-center">
+				<h2>Contact Us</h2>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb justify-content-center">
+						<li class="breadcrumb-item"><a href="@Url.Action("")">Home</a></li>
+						<li class="breadcrumb-item text-white" aria-current="page">Contact Us</li>
+					</ol>
+				</nav>
+			</div>
+		</div><!-- Subpage title end -->
+	</div><!-- Banner area end -->
+	<!-- Main container start -->
+	<section id="main-container">
+		<div class="container">
+			<!-- Map start here -->
+			<!-- <div class="map" id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"
+				data-marker="images/marker.png"></div> -->
+			<!-- <div class="map" id="map_canvas">
+				<iframe class="map" id="map_canvas"
+				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2173.1614887927153!2d73.81524183666683!3d18.497531398272443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfc1772ed7c3%3A0xc97cd29b5826f576!2sGTL%20SOFTWARE%20PVT.%20LTD.!5e0!3m2!1sen!2sin!4v1725788792701!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			</div> -->
+			<div class="container">
+				<div class="row">
+					<div class="col-12 col-md-8 col-lg-8 mx-auto">
+						<div class="map-wrapper">
+							<iframe class="map embed-responsive-item"
+									src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2173.1614887927153!2d73.81524183666683!3d18.497531398272443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfc1772ed7c3%3A0xc97cd29b5826f576!2sGTL%20SOFTWARE%20PVT.%20LTD.!5e0!3m2!1sen!2sin!4v1725788792701!5m2!1sen!2sin"
+									allowfullscreen=""
+									loading="lazy"
+									referrerpolicy="no-referrer-when-downgrade">
+							</iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<!--/ Map end here -->
+
+			<div class="gap-40"></div>
+
+			<div class="row">
+				<div class="col-lg-7">
+					<form id="contact-form" action="" method="post" role="form">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Name</label>
+									<input class="form-control" name="name" id="name" placeholder="" type="text" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Email</label>
+									<input class="form-control" name="email" id="email" placeholder="" type="email" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Subject</label>
+									<input class="form-control" name="subject" id="subject" placeholder="" required>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Message</label>
+							<textarea class="form-control" name="message" id="message" placeholder="" rows="10" required></textarea>
+						</div>
+						<div class="text-right">
+							<br>
+							<button class="btn btn-outline-primary  blank" type="submit">Send Message</button>
+						</div>
+					</form>
+				</div>
+				<div class="col-lg-5">
+					<div class="contact-info">
+						<h3>Contact Details</h3>
+
+						<br>
+						<p><i class="fa fa-home info"></i> Office No. 1, Vitthal smruti , Kokan Exp Len, Kothrud, Rahul Nagar, Kothrud, Pune, Maharashtra 411038 </p>
+						<p><i class="fa fa-phone info"></i> <a href="tel:+91-8446633957">+91-8446633957</a> </p>
+						<p><i class="fa fa-envelope-o info"></i> info@gtlsoftwares.com</p>
+						<p><i class="fa fa-envelope-o info"></i> shilpa@gtlsoftwares.com</p>
+						<p><i class="fa fa-globe info"></i> www.gtlsoftwares.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ container end -->
+	</section>
+	<!--/ Main container end -->
+	<!-- Footer start -->
+	<footer id="footer" class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-lg-4 footer-widget mb-5 mb-lg-0">
+					<h3 class="widget-title">Our Memorable Moments</h3>
+
+					<div class="img-gallery">
+						<div class="img-container">
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img1.jpeg">
+								<img src="~/assets/public/images/gallery/img1.jpeg" alt="">
+							</a>
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img2.jpeg">
+								<img src="~/assets/public/images/gallery/img2.jpeg" alt="">
+							</a>
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img3.jpeg">
+								<img src="~/assets/public/images/gallery/img3.jpeg" alt="">
+							</a>
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img4.jpeg">
+								<img src="~/assets/public/images/gallery/img4.jpeg" alt="">
+							</a>
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img5.jpeg">
+								<img src="~/assets/public/images/gallery/img5.jpeg" alt="">
+							</a>
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img6.jpeg">
+								<img src="~/assets/public/images/gallery/img6.jpeg" alt="">
+							</a>
+
+						</div>
+					</div>
+
+				</div>
+				<!--/ End Recent Posts-->
+
+				<div class="col-md-8 col-lg-4 footer-widget mb-5 mb-lg-0">
+				</div>
+				<!--/ end flickr -->
+
+				<div class="col-md-12 col-lg-4 footer-widget footer-about-us mb-5 mb-lg-0">
+					<h3 class="widget-title">About GTL Software</h3>
+					<p>With the best software and hardware environments coupled with state-of-the-art communication facilities.</p>
+					<h4>Address</h4>
+					<p>PUNE- Office No. 1, Vitthal smruti , Kokan Exp Len, Kothrud, Rahul Nagar, Kothrud, Pune, Maharashtra 411038</p>
+					<div class="row">
+						<div class="col-12">
+							<h4>Email:</h4>
+							<p><a href="mailto:info@gtlsoftwares.com" class="text-white">info@gtlsoftwares.com</a></p>
+							<p><a href="mailto:shilpa@gtlsoftwares.com" class="text-white">shilpa@gtlsoftwares.com</a></p>
+						</div>
+						<div class="col-12">
+							<h4>Phone No.</h4>
+							<p><a href="tel:+91-8446633957" class="text-white">+91-8446633957</a></p>
+						</div>
+					</div>
+					<!-- <form action="#" role="form">
+					  <div class="input-group subscribe">
+						<input type="email" class="form-control" placeholder="Email Address" required="">
+						<span class="input-group-addon">
+						  <button class="btn" type="submit"><i class="fa fa-envelope-o"> </i></button>
+						</span>
+					  </div>
+					</form> -->
+				</div>
+				<!--/ end about us -->
+
+			</div><!-- Row end -->
+		</div><!-- Container end -->
+	</footer><!-- Footer end -->
+	<!-- Copyright start -->
+	<section id="copyright" class="copyright angle">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<ul class="footer-social unstyled">
+						<li>
+							<a title="Instagram" href="https://www.instagram.com/gtlsoftwares/">
+								<span class="icon-pentagon wow bounceIn"><i class="fa fa-instagram"></i></span>
+							</a>
+							<a title="Facebook" href="https://www.facebook.com/gtlsoftwares">
+								<span class="icon-pentagon wow bounceIn"><i class="fa fa-facebook"></i></span>
+							</a>
+							<a title="linkedin" href="https://www.linkedin.com/company/gtlsoftware/mycompany/">
+								<span class="icon-pentagon wow bounceIn"><i class="fa fa-linkedin"></i></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--/ Row end -->
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="copyright-info">
+						&copy; Copyright <span id="currentYear"></span> gtlsoftwares. <span>
+							Designed by <a href="https://www.gtlsoftwares.com/">gtlsoftwares.com</a>
+						</span>
+					</div>
+				</div>
+				<script>
+					const year = new Date().getFullYear();
+					document.getElementById("currentYear").textContent = year;
+				</script>
+			</div>
+			<!--/ Row end -->
+			<div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top affix position-fixed">
+				<button class="btn btn btn-outline-white" title="Back to Top"><i class="fa fa-angle-double-up"></i></button>
+			</div>
+		</div>
+		<!--/ Container end -->
+	</section>
+	<!--/ Copyright end -->
+
+</div><!-- Body inner end -->
+@section scripts {
+	<!-- jQuery -->
+	<script src="~/assets/public/plugins/jQuery/jquery.min.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="~/assets/public/plugins/bootstrap/bootstrap.min.js"></script>
+	<!-- Style Switcher -->
+	<script type="text/javascript" src="~/assets/public/plugins/style-switcher.js"></script>
+	<!-- Owl Carousel -->
+	<script type="text/javascript" src="~/assets/public/plugins/owl/owl.carousel.js"></script>
+	<!-- PrettyPhoto -->
+	<script type="text/javascript" src="~/assets/public/plugins/jquery.prettyPhoto.js"></script>
+	<!-- Bxslider -->
+	<script type="text/javascript" src="~/assets/public/plugins/flex-slider/jquery.flexslider.js"></script>
+	<!-- Slick slider -->
+	<script type="text/javascript" src="~/assets/public/plugins/slick/slick.min.js"></script>
+	<!-- Isotope -->
+	<script type="text/javascript" src="~/assets/public/plugins/isotope.js"></script>
+	<script type="text/javascript" src="~/assets/public/plugins/ini.isotope.js"></script>
+	<!-- Wow Animation -->
+	<script type="text/javascript" src="~/assets/public/plugins/wow.min.js"></script>
+	<!-- Eeasing -->
+	<script type="text/javascript" src="~/assets/public/plugins/jquery.easing.1.3.js"></script>
+	<!-- Counter -->
+	<script type="text/javascript" src="~/assets/public/plugins/jquery.counterup.min.js"></script>
+	<!-- Waypoints -->
+	<script type="text/javascript" src="~/assets/public/plugins/waypoints.min.js"></script>
+	<!-- google map -->
+	<!-- Main Script -->
+	<script src="~/assets/public/js/script.js"></script>
+
+}

@@ -1,0 +1,431 @@
+﻿@*
+    
+*@
+@{
+	ViewData["Title"] = "About Us";
+}
+
+<div class="body-inner">
+
+	<!-- Header start -->
+	<header id="header" class="fixed-top header" role="banner">
+		<!-- <a class="navbar-brand navbar-bg" href=""><img class="img-fluid float-right" src="img/favicon/logo.png" alt="logo"></a> -->
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="navbar navbar-expand-lg navbar-dark">
+						<a class="navbar-brand navbar-bg" href=""><img class="img-fluid float-right" src="~/assets/public/img/favicon/logo.png" alt="logo"></a>
+						<button class="navbar-toggler ml-auto border-0 rounded-0 text-white" type="button" data-toggle="collapse"
+								data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="fa fa-bars"></span>
+						</button>
+
+						<div class="collapse navbar-collapse text-center" id="navigation">
+							<ul class="navbar-nav ml-auto">
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("")">Home</a></a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("About")">About Us</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("Service")">Services</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("Career")">Career</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("Contact")">Contact</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!--/ Header end -->
+
+<div id="banner-area">
+	<img src="~/assets/public/images/banner/banner1.jpg" alt="" />
+	<div class="parallax-overlay"></div>
+	<!-- Subpage title start -->
+	<div class="banner-title-content">
+		<div class="text-center">
+			<h2>About Us</h2>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb justify-content-center">
+						<li class="breadcrumb-item"><a href="@Url.Action("")">Home</a></li>
+					<li class="breadcrumb-item text-white" aria-current="page">About Us</li>
+				</ol>
+			</nav>
+		</div>
+	</div><!-- Subpage title end -->
+</div><!-- Banner area end -->
+<!-- Main container start -->
+<section id="main-container">
+	<div class="container">
+
+		<!-- Company Profile -->
+		<div class="row">
+			<div class="col-md-12 heading">
+				<span class="title-icon classic float-left">
+					<!-- <i class="fa fa-suitcase"></i> -->
+					<img class="img-fluid float-right" src="~/assets/public/img/favicon/logo.png" alt="logo">
+				</span>
+				<h2 class="title classic">Company Profile</h2>
+			</div>
+		</div><!-- Title row end -->
+
+		<div class="row landing-tab">
+			<div class="col-md-4">
+				<div class="nav flex-column nav-pills border-md-right h-100 mr-lg-5 mb-3 mb-md-0" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+					<a class="animated fadeIn nav-link  py-2 py-lg-4  active d-flex align-items-center" data-toggle="pill" href="#tab_1"
+					   role="tab" aria-selected="true">
+						<i class="fa fa-info-circle mr-4"></i>
+						<span class="h4 mb-0 font-weight-bold">Who Are We</span>
+					</a>
+					<a class="animated fadeIn nav-link py-2 py-lg-4 d-flex align-items-center" data-toggle="pill" href="#tab_2" role="tab"
+					   aria-selected="true">
+						<i class="fa fa-briefcase mr-4"></i>
+						<span class="h4 mb-0 font-weight-bold">OUR COMPANY</span>
+					</a>
+					<a class="animated fadeIn nav-link py-2 py-lg-4 d-flex align-items-center" data-toggle="pill" href="#tab_3" role="tab"
+					   aria-selected="true">
+						<i class="fa fa-android mr-4"></i>
+						<span class="h4 mb-0 font-weight-bold">What We Do</span>
+					</a>
+					<a class="animated fadeIn nav-link py-2 py-lg-4 d-flex align-items-center" data-toggle="pill" href="#tab_4" role="tab"
+					   aria-selected="true">
+						<i class="fa fa-pagelines mr-4"></i>
+						<span class="h4 mb-0 font-weight-bold">Modern Design</span>
+					</a>
+					<a class="animated fadeIn nav-link py-2 py-lg-4 d-flex align-items-center" data-toggle="pill" href="#tab_5" role="tab"
+					   aria-selected="true">
+						<i class="fa fa-support mr-4"></i>
+						<span class="h4 mb-0 font-weight-bold">Dedicated Support</span>
+					</a>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="tab-content" id="v-pills-tabContent">
+					<div class="tab-pane pl-md-5 fade show active animated px-3  fadeInLeft" id="tab_1" role="tabpanel">
+						<!-- <i class="fa fa-trophy icon-xl text-primary mb-4"></i> -->
+							<img class="img-fluid icon-xl  mb-4" src="~/assets/public/img/favicon/logo.png" alt="logo">
+						<h3>About Us</h3>
+						<p>
+							GTL SOFTWARE is a Professional Software Development Organisation Dedicated To Assisting Small
+							To Medium Sized Businesses Establish An Online Presence.The Quality Of Our Designs And Programming
+							Is Evident In The Softwares. We Have Developed Through Our Expertise And Years Of Experience.
+							(Our Older Name Is "DP Software")
+						</p>
+					</div>
+					<div class="tab-pane pl-md-5 fade animated fadeInLeft px-3 " id="tab_2" role="tabpanel">
+						<i class="fa fa-briefcase icon-xl text-primary mb-4"></i>
+						<!-- <h3>We Have Worldwide Business</h3> -->
+						<p>
+							We are a digital agency that helps brands to achieve their business outcomes.
+							We see technology as a tool to create amazing things.
+						</p>
+
+					</div>
+					<div class="tab-pane pl-md-5 fade animated fadeInLeft px-3 " id="tab_3" role="tabpanel">
+						<i class="fa fa-android icon-xl text-primary mb-4"></i>
+						<h3>We Build Readymade Applications</h3>
+						<p>
+							We Offer "Professional-level Software development, Web Developemnt , E-commerce Solutions And Marketing Services."
+							Our Development Team Produces Innovative, High-Performance Application Solutions For Industries Having Diverse Areas Of Activity.
+						</p>
+
+					</div>
+					<div class="tab-pane pl-md-5 fade animated fadeInLeft px-3 " id="tab_4" role="tabpanel">
+						<i class="fa fa-pagelines icon-xl text-primary mb-4"></i>
+						<h3>Clean and Modern Design</h3>
+						<p>
+							Over the year we have lots of experience in our field creating Stylish, user-friendly designs that capture attention
+							using latest technologies.
+						</p>
+					</div>
+					<div class="tab-pane pl-md-5 fade animated fadeInLeft px-3 " id="tab_5" role="tabpanel">
+						<i class="fa fa-support icon-xl text-primary mb-4"></i>
+						<h3>24/7 Dedicated Support</h3>
+						<p>
+							With the best software and hardware environments coupled with state-of-the-art communication facilities.
+							our offices are fully equipped to work as virtual extensions of clients' environment, providing custom
+							application development services as well as 24*7 Infrastructure management services.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ Content row end -->
+	</div>
+	<!--/ 1st container end -->
+
+
+	<div class="gap-60"></div>
+
+
+	<!-- Counter Strat -->
+	<div class="ts_counter_bg parallax parallax2">
+		<div class="parallax-overlay"></div>
+		<div class="container">
+			<div class="row wow fadeInLeft text-center">
+				<div class="facts col-md-3 col-sm-6">
+					<span class="facts-icon"><i class="fa fa-building-o"></i></span>
+					<!-- <div class="facts-num">
+						<span class="counter">1200</span>
+					</div> -->
+					<h3>Office Space - 2,000 sq. ft.</h3>
+				</div>
+
+				<div class="facts col-md-3 col-sm-6">
+					<span class="facts-icon"><i class="fa fa-shield"></i></span>
+					<!-- <div class="facts-num">
+						<span class="counter">1277</span>
+					</div> -->
+					<h3>24x7 surveillance</h3>
+				</div>
+
+				<div class="facts col-md-3 col-sm-6">
+					<span class="facts-icon"><i class="fa fa-cogs"></i></span>
+					<!-- <div class="facts-num">
+						<span class="counter">869</span>
+					</div> -->
+					<h3>Development, Support and Testing Systems</h3>
+				</div>
+
+				<div class="facts col-md-3 col-sm-6">
+					<span class="facts-icon"><i class="fa fa-database"></i></span>
+					<!-- <div class="facts-num">
+						<span class="counter">76</span>
+					</div> -->
+					<h3>Integrated automated backup service</h3>
+				</div>
+				<div class="facts col-md-3 col-sm-6">
+					<span class="facts-icon"><i class="fa fa-lightbulb-o"></i></span>
+					<!-- <div class="facts-num">
+						<span class="counter">76</span>
+					</div> -->
+					<h3>Creative work environment</h3>
+				</div>
+				<div class="facts col-md-3 col-sm-6">
+					<span class="facts-icon"><i class="fa fa-desktop"></i></span>
+					<!-- <div class="facts-num">
+						<span class="counter">76</span>
+					</div> -->
+					<h3>Equipped development center</h3>
+				</div>
+				<div class="facts col-md-3 col-sm-6">
+					<span class="facts-icon"><i class="fa fa-globe"></i></span>
+					<!-- <div class="facts-num">
+						<span class="counter">76</span>
+					</div> -->
+					<h3>24x7 Network Operations</h3>
+				</div>
+				<div class="facts col-md-3 col-sm-6">
+					<span class="facts-icon"><i class="fa fa-wifi"></i></span>
+					<!-- <div class="facts-num">
+						<span class="counter">76</span>
+					</div> -->
+					<h3>Redundant internet connectivity</h3>
+				</div>
+
+				<div class="gap-40"></div>
+
+				<!-- <div class="col-12 text-center"><a href="#" class="btn btn-outline-primary text-white">See Our Portfolio</a></div> -->
+
+			</div>
+			<!--/ row end -->
+		</div>
+		<!--/ Container end -->
+	</div>
+	<!--/ Counter end -->
+
+	<div class="gap-60"></div>
+
+
+	<div class="container">
+		<!-- 2nd container start -->
+		<!-- Team start -->
+		<section id="team" class="team">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 heading">
+						<span class="title-icon float-left"><i class="fa fa-building-o"></i></span>
+						<h2 class="title">INFRASTRUCTURE <span class="title-desc"></span></h2>
+					</div>
+				</div><!-- Title row end -->
+
+				<div class="row text-center">
+
+					<div class="col-md-12 col-lg-12">
+						<div class="team wow slideInLeft">
+
+							<div class="team-content">
+								<p>
+									With the best software and hardware environments coupled with state-of-the-art
+									communication facilities. our offices are fully equipped to work as virtual extensions
+									of clients' environment, providing custom application development services as well as
+									24*7 Infrastructure management services.
+								</p>
+
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				<!--/ Content row end -->
+			</div>
+			<!--/ Container end -->
+		</section>
+		<!--/ Team end -->
+
+
+	</div><!-- 2nd container end -->
+</section>
+<!--/ Main container end -->
+<!-- Footer start -->
+<footer id="footer" class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-lg-4 footer-widget mb-5 mb-lg-0">
+				<h3 class="widget-title">Our Memorable Moments</h3>
+
+				<div class="img-gallery">
+					<div class="img-container">
+						<a class="thumb-holder" data-rel="prettyPhoto" href="images/gallery/img1.jpeg">
+							<img src="~/assets/public/images/gallery/img1.jpeg" alt="">
+						</a>
+						<a class="thumb-holder" data-rel="prettyPhoto" href="images/gallery/img2.jpeg">
+							<img src="~/assets/public/images/gallery/img2.jpeg" alt="">
+						</a>
+						<a class="thumb-holder" data-rel="prettyPhoto" href="images/gallery/img3.jpeg">
+							<img src="~/assets/public/images/gallery/img3.jpeg" alt="">
+						</a>
+						<a class="thumb-holder" data-rel="prettyPhoto" href="images/gallery/img4.jpeg">
+							<img src="~/assets/public/images/gallery/img4.jpeg" alt="">
+						</a>
+						<a class="thumb-holder" data-rel="prettyPhoto" href="images/gallery/img5.jpeg">
+							<img src="~/assets/public/images/gallery/img5.jpeg" alt="">
+						</a>
+						<a class="thumb-holder" data-rel="prettyPhoto" href="images/gallery/img6.jpeg">
+							<img src="~/assets/public/images/gallery/img6.jpeg" alt="">
+						</a>
+
+					</div>
+				</div>
+
+			</div>
+			<!--/ End Recent Posts-->
+
+			<div class="col-md-8 col-lg-4 footer-widget mb-5 mb-lg-0">
+			</div>
+			<!--/ end flickr -->
+
+			<div class="col-md-12 col-lg-4 footer-widget footer-about-us mb-5 mb-lg-0">
+				<h3 class="widget-title">About GTL Software</h3>
+				<p>With the best software and hardware environments coupled with state-of-the-art communication facilities.</p>
+				<h4>Address</h4>
+				<p>PUNE- Office No. 1, Vitthal smruti , Kokan Exp Len, Kothrud, Rahul Nagar, Kothrud, Pune, Maharashtra 411038</p>
+				<div class="row">
+					<div class="col-12">
+						<h4>Email:</h4>
+						<p><a href="mailto:info@gtlsoftwares.com" class="text-white">info@gtlsoftwares.com</a></p>
+						<p><a href="mailto:shilpa@gtlsoftwares.com" class="text-white">shilpa@gtlsoftwares.com</a></p>
+					</div>
+					<div class="col-12">
+						<h4>Phone No.</h4>
+						<p><a href="tel:+91-8446633957" class="text-white">+91-8446633957</a></p>
+					</div>
+				</div>
+				<!-- <form action="#" role="form">
+				  <div class="input-group subscribe">
+					<input type="email" class="form-control" placeholder="Email Address" required="">
+					<span class="input-group-addon">
+					  <button class="btn" type="submit"><i class="fa fa-envelope-o"> </i></button>
+					</span>
+				  </div>
+				</form> -->
+			</div>
+			<!--/ end about us -->
+
+		</div><!-- Row end -->
+	</div><!-- Container end -->
+</footer><!-- Footer end -->
+<!-- Copyright start -->
+<section id="copyright" class="copyright angle">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<ul class="footer-social unstyled">
+					<li>
+						<a title="Instagram" href="https://www.instagram.com/gtlsoftwares/">
+							<span class="icon-pentagon wow bounceIn"><i class="fa fa-instagram"></i></span>
+						</a>
+						<a title="Facebook" href="https://www.facebook.com/gtlsoftwares">
+							<span class="icon-pentagon wow bounceIn"><i class="fa fa-facebook"></i></span>
+						</a>
+						<a title="linkedin" href="https://www.linkedin.com/company/gtlsoftware/mycompany/">
+							<span class="icon-pentagon wow bounceIn"><i class="fa fa-linkedin"></i></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--/ Row end -->
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="copyright-info">
+					&copy; Copyright <span id="currentYear"></span> gtlsoftwares. <span>
+						Designed by <a href="https://www.gtlsoftwares.com/">gtlsoftwares.com</a>
+					</span>
+				</div>
+			</div>
+			<script>
+				const year = new Date().getFullYear();
+				document.getElementById("currentYear").textContent = year;
+			</script>
+		</div>
+		<!--/ Row end -->
+		<div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top affix position-fixed">
+			<button class="btn btn btn-outline-white" title="Back to Top"><i class="fa fa-angle-double-up"></i></button>
+		</div>
+	</div>
+	<!--/ Container end -->
+</section>
+<!--/ Copyright end -->
+</div>
+@section scripts {
+	<!-- jQuery -->
+	<script src="~/assets/public/plugins/jQuery/jquery.min.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="~/assets/public/plugins/bootstrap/bootstrap.min.js"></script>
+	<!-- Style Switcher -->
+	<script type="text/javascript" src="~/assets/public/plugins/style-switcher.js"></script>
+	<!-- Owl Carousel -->
+	<script type="text/javascript" src="~/assets/public/plugins/owl/owl.carousel.js"></script>
+	<!-- PrettyPhoto -->
+	<script type="text/javascript" src="~/assets/public/plugins/jquery.prettyPhoto.js"></script>
+	<!-- Bxslider -->
+	<script type="text/javascript" src="~/assets/public/plugins/flex-slider/jquery.flexslider.js"></script>
+	<!-- Slick slider -->
+	<script type="text/javascript" src="~/assets/public/plugins/slick/slick.min.js"></script>
+	<!-- Isotope -->
+	<script type="text/javascript" src="~/assets/public/plugins/isotope.js"></script>
+	<script type="text/javascript" src="~/assets/public/plugins/ini.isotope.js"></script>
+	<!-- Wow Animation -->
+	<script type="text/javascript" src="~/assets/public/plugins/wow.min.js"></script>
+	<!-- Eeasing -->
+	<script type="text/javascript" src="~/assets/public/plugins/jquery.easing.1.3.js"></script>
+	<!-- Counter -->
+	<script type="text/javascript" src="~/assets/public/plugins/jquery.counterup.min.js"></script>
+	<!-- Waypoints -->
+	<script type="text/javascript" src="~/assets/public/plugins/waypoints.min.js"></script>
+	<!-- google map -->
+	<!-- Main Script -->
+	<script src="~/assets/public/js/script.js"></script>
+
+}

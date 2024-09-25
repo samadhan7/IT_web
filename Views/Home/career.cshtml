@@ -1,0 +1,320 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Career";
+}
+<div class="body-inner">
+
+
+	<!-- Header start -->
+	<header id="header" class="fixed-top header" role="banner">
+		<!-- <a class="navbar-brand navbar-bg" href=""><img class="img-fluid float-right" src="img/favicon/logo.png" alt="logo"></a> -->
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="navbar navbar-expand-lg navbar-dark">
+						<a class="navbar-brand navbar-bg" href=""><img class="img-fluid float-right" src="~/assets/public/img/favicon/logo.png" alt="logo"></a>
+						<button class="navbar-toggler ml-auto border-0 rounded-0 text-white" type="button" data-toggle="collapse"
+								data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="fa fa-bars"></span>
+						</button>
+
+						<div class="collapse navbar-collapse text-center" id="navigation">
+							<ul class="navbar-nav ml-auto">
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("","Home")">Home</a></a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("About")">About Us</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("Service")">Services</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("Career")">Career</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="@Url.Action("Contact")">Contact</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!--/ Header end -->
+
+	<div id="banner-area">
+		<img src="~/assets/public/images/banner/banner1.jpg" alt="" />
+		<div class="parallax-overlay"></div>
+		<!-- Subpage title start -->
+		<div class="banner-title-content">
+			<div class="text-center">
+				<h2>Career</h2>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb justify-content-center">
+						<li class="breadcrumb-item"><a href="@Url.Action("", "Home")">Home</a></li>
+						<li class="breadcrumb-item text-white" aria-current="page">Career</li>
+					</ol>
+				</nav>
+			</div>
+		</div><!-- Subpage title end -->
+	</div><!-- Banner area end -->
+	<!-- Main container start -->
+	<section id="main-container">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+
+					<h3 id="job-name" class="title-border">Senior Manager</h3>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, natus voluptatibus adipisci porro magni
+						dolore eos eius ducimus corporis quos perspiciatis quis iste, vitae autem libero ullam omnis cupiditate quam.
+					</p>
+
+					<div class="accordion" id="accordion">
+						<h6>location : pune</h6>
+						<h6>Experience : 0-1 yrs</h6>
+						<div class="gap-20"></div>
+						<p>
+							<a href="javascript:void(0)" class="btn btn-outline-primary" data-toggle="modal" data-target="#applyModal">
+								<span class="mr-2">Apply Now</span> <i class="fa fa-long-arrow-right"></i>
+							</a>
+						</p>
+					</div>
+
+					<div class="gap-40"></div>
+					<!--/ Accordion end -->
+
+				</div>
+				<!--/ Content col end -->
+
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					<div class="sidebar sidebar-right">
+						<!-- category start -->
+						<div class="widget widget-categories">
+							<h3>How to Apply</h3>
+							<p>
+								Send your cv, relevant work experience and anything else that will make you stand out to
+								career@bizcraft.com
+							</p>
+						</div><!-- category end -->
+						<!-- tags start -->
+						<div class="widget widget-tags">
+							<h3>Why Us</h3>
+							<p>
+								We are an awward winning company. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, natus
+								voluptatibus adipisci porro magni dolore eos eius ducimus corporis quos perspiciatis quis iste, vitae
+								autem libero ullam omnis cupiditate quam.
+							</p>
+						</div><!-- tags end -->
+					</div>
+					<!--/ Sidebar end -->
+				</div>
+				<!--/ Sidebar col end -->
+			</div>
+			<!--/ row end -->
+		</div>
+		<!--/ container end -->
+	</section>
+	<!--/ Main container end -->
+
+	<div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="applyModalLabel">Apply for - <span id="modalJobTitle"></span></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="name">Name</label>
+							<input type="text" class="form-control" id="name" required>
+						</div>
+						<div class="form-group">
+							<label for="contact">Contact No.</label>
+							<input type="tel" class="form-control" id="contact" required>
+						</div>
+						<div class="form-group">
+							<label for="resume">Resume/CV</label>
+							<input type="file" class="form-control-file" id="resume" required>
+						</div>
+						<div class="form-group">
+							<label for="address">Address</label>
+							<input type="text" class="form-control" id="address" required>
+						</div>
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="email" class="form-control" id="email" required>
+						</div>
+						<div class="form-group">
+							<label for="coverLetter">Cover Letter</label>
+							<textarea class="form-control" id="coverLetter" rows="3" required></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit Application</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer start -->
+	<footer id="footer" class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-lg-4 footer-widget mb-5 mb-lg-0">
+					<h3 class="widget-title">Our Memorable Moments</h3>
+
+					<div class="img-gallery">
+						<div class="img-container">
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img1.jpeg">
+								<img src="~/assets/public/images/gallery/img1.jpeg" alt="">
+							</a>
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img2.jpeg">
+								<img src="~/assets/public/images/gallery/img2.jpeg" alt="">
+							</a>
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img3.jpeg">
+								<img src="~/assets/public/images/gallery/img3.jpeg" alt="">
+							</a>
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img4.jpeg">
+								<img src="~/assets/public/images/gallery/img4.jpeg" alt="">
+							</a>
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img5.jpeg">
+								<img src="~/assets/public/images/gallery/img5.jpeg" alt="">
+							</a>
+							<a class="thumb-holder" data-rel="prettyPhoto" href="~/assets/public/images/gallery/img6.jpeg">
+								<img src="~/assets/public/images/gallery/img6.jpeg" alt="">
+							</a>
+
+						</div>
+					</div>
+
+				</div>
+				<!--/ End Recent Posts-->
+
+				<div class="col-md-8 col-lg-4 footer-widget mb-5 mb-lg-0">
+				</div>
+				<!--/ end flickr -->
+
+				<div class="col-md-12 col-lg-4 footer-widget footer-about-us mb-5 mb-lg-0">
+					<h3 class="widget-title">About GTL Software</h3>
+					<p>With the best software and hardware environments coupled with state-of-the-art communication facilities.</p>
+					<h4>Address</h4>
+					<p>PUNE- Office No. 1, Vitthal smruti , Kokan Exp Len, Kothrud, Rahul Nagar, Kothrud, Pune, Maharashtra 411038</p>
+					<div class="row">
+						<div class="col-12">
+							<h4>Email:</h4>
+							<p><a href="mailto:info@gtlsoftwares.com" class="text-white">info@gtlsoftwares.com</a></p>
+							<p><a href="mailto:shilpa@gtlsoftwares.com" class="text-white">shilpa@gtlsoftwares.com</a></p>
+						</div>
+						<div class="col-12">
+							<h4>Phone No.</h4>
+							<p><a href="tel:+91-8446633957" class="text-white">+91-8446633957</a></p>
+						</div>
+					</div>
+					<!-- <form action="#" role="form">
+					  <div class="input-group subscribe">
+						<input type="email" class="form-control" placeholder="Email Address" required="">
+						<span class="input-group-addon">
+						  <button class="btn" type="submit"><i class="fa fa-envelope-o"> </i></button>
+						</span>
+					  </div>
+					</form> -->
+				</div>
+				<!--/ end about us -->
+
+			</div><!-- Row end -->
+		</div><!-- Container end -->
+	</footer><!-- Footer end -->
+	<!-- Copyright start -->
+	<section id="copyright" class="copyright angle">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<ul class="footer-social unstyled">
+						<li>
+							<a title="Instagram" href="https://www.instagram.com/gtlsoftwares/">
+								<span class="icon-pentagon wow bounceIn"><i class="fa fa-instagram"></i></span>
+							</a>
+							<a title="Facebook" href="https://www.facebook.com/gtlsoftwares">
+								<span class="icon-pentagon wow bounceIn"><i class="fa fa-facebook"></i></span>
+							</a>
+							<a title="linkedin" href="https://www.linkedin.com/company/gtlsoftware/mycompany/">
+								<span class="icon-pentagon wow bounceIn"><i class="fa fa-linkedin"></i></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--/ Row end -->
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="copyright-info">
+						&copy; Copyright <span id="currentYear"></span> gtlsoftwares. <span>
+							Designed by <a href="https://www.gtlsoftwares.com/">gtlsoftwares.com</a>
+						</span>
+					</div>
+				</div>
+				<script>
+					const year = new Date().getFullYear();
+					document.getElementById("currentYear").textContent = year;
+				</script>
+			</div>
+			<!--/ Row end -->
+			<div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top affix position-fixed">
+				<button class="btn btn btn-outline-white" title="Back to Top"><i class="fa fa-angle-double-up"></i></button>
+			</div>
+		</div>
+		<!--/ Container end -->
+	</section>
+	<!--/ Copyright end -->
+
+</div><!-- Body inner end -->
+@section scripts {
+	<!-- jQuery -->
+	<script src="~/assets/public/plugins/jQuery/jquery.min.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="~/assets/public/plugins/bootstrap/bootstrap.min.js"></script>
+	<!-- Style Switcher -->
+	<script type="text/javascript" src="~/assets/public/plugins/style-switcher.js"></script>
+	<!-- Owl Carousel -->
+	<script type="text/javascript" src="~/assets/public/plugins/owl/owl.carousel.js"></script>
+	<!-- PrettyPhoto -->
+	<script type="text/javascript" src="~/assets/public/plugins/jquery.prettyPhoto.js"></script>
+	<!-- Bxslider -->
+	<script type="text/javascript" src="~/assets/public/plugins/flex-slider/jquery.flexslider.js"></script>
+	<!-- Slick slider -->
+	<script type="text/javascript" src="~/assets/public/plugins/slick/slick.min.js"></script>
+	<!-- Isotope -->
+	<script type="text/javascript" src="~/assets/public/plugins/isotope.js"></script>
+	<script type="text/javascript" src="~/assets/public/plugins/ini.isotope.js"></script>
+	<!-- Wow Animation -->
+	<script type="text/javascript" src="~/assets/public/plugins/wow.min.js"></script>
+	<!-- Eeasing -->
+	<script type="text/javascript" src="~/assets/public/plugins/jquery.easing.1.3.js"></script>
+	<!-- Counter -->
+	<script type="text/javascript" src="~/assets/public/plugins/jquery.counterup.min.js"></script>
+	<!-- Waypoints -->
+	<script type="text/javascript" src="~/assets/public/plugins/waypoints.min.js"></script>
+	<!-- google map -->
+	<!-- Main Script -->
+	<script src="~/assets/public/js/script.js"></script>
+	<script>
+		// When the modal is shown, update the job title in the modal
+		$('#applyModal').on('show.bs.modal', function (event) {
+			var button = $(event.relatedTarget); // Button that triggered the modal
+			var jobTitle = $('#job-name').text(); // Extract the job title from the page
+			console.log(jobTitle);
+			var modal = $(this);
+			modal.find('#modalJobTitle').text(jobTitle);
+		});
+
+	</script>
+
+}

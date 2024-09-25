@@ -1,0 +1,200 @@
+﻿@*
+    
+*@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "Dashboard";
+}
+
+<!-- top bar navigation -->
+<div class="headerbar">
+
+	<!-- LOGO -->
+	<div class="headerbar-left">
+		<a href="@Url.Action("Dashboard","admin")" class="logo"><img alt="Logo" src="~/assets/public/img/favicon/logo.png" /> <span>Admin</span></a>
+	</div>
+
+	<nav class="navbar-custom">
+
+		<ul class="list-inline float-right mb-0">
+
+
+			<li class="list-inline-item dropdown notif">
+				<a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+					<img src="~/assets/admin/images/avatars/admin.png" alt="Profile image" class="avatar-rounded">
+				</a>
+				<div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+					<!-- item-->
+					<div class="dropdown-item noti-title">
+						<h5 class="text-overflow"><small>Hello, admin</small> </h5>
+					</div>
+
+					<!-- item-->
+					<a href="@Url.Action("Profile","admin")" class="dropdown-item notify-item">
+						<i class="fa fa-user"></i> <span>Profile</span>
+					</a>
+
+					<!-- item-->
+					<a href="@Url.Action("Logout","admin")" class="dropdown-item notify-item">
+						<i class="fa fa-power-off"></i> <span>Logout</span>
+					</a>
+
+				</div>
+			</li>
+
+		</ul>
+
+		<ul class="list-inline menu-left mb-0">
+			<li class="float-left">
+				<button class="button-menu-mobile open-left">
+					<i class="fa fa-fw fa-bars"></i>
+				</button>
+			</li>
+		</ul>
+
+	</nav>
+
+</div>
+<!-- End Navigation -->
+<!-- Left Sidebar -->
+<div class="left main-sidebar">
+
+	<div class="sidebar-inner leftscroll">
+
+		<div id="sidebar-menu">
+
+			<ul>
+				<li class="submenu">
+					<a class="active" href="@Url.Action("Dashboard","admin")"><i class="fa fa-fw fa-tachometer"></i><span> Dashboard </span> </a>
+				</li>
+
+				<li class="submenu">
+					<a href="@Url.Action("Openings","admin")"><i class="fa fa-fw fa-briefcase"></i><span> Manage Openings </span> </a>
+				</li>
+
+				<li class="submenu">
+					<a href="@Url.Action("Applications","admin")"><i class="fa fa-fw fa-file"></i><span> Job Applications </span> </a>
+				</li>
+
+				<li class="submenu">
+					<a href="@Url.Action("Inquiries","admin")"><i class="fa fa-fw fa-envelope"></i><span> Manage Inquiries </span> </a>
+				</li>
+
+
+			</ul>
+
+			<div class="clearfix"></div>
+
+		</div>
+
+		<div class="clearfix"></div>
+
+	</div>
+
+</div>
+<!-- End Sidebar -->
+
+
+
+
+<div class="content-page">
+
+	<!-- Start content -->
+	<div class="content">
+
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="breadcrumb-holder">
+						<h1 class="main-title float-left">Dashboard</h1>
+						<ol class="breadcrumb float-right">
+							<li class="breadcrumb-item">Home</li>
+							<li class="breadcrumb-item active">Dashboard</li>
+						</ol>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+			
+
+			<div class="row">
+				<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+					<div class="card-box noradius noborder bg-default">
+						<i class="fa fa-file-text-o float-right text-white"></i>
+						<h6 class="text-white text-uppercase m-b-20">Orders</h6>
+						<h1 class="m-b-20 text-white counter">1,587</h1>
+						<span class="text-white">15 New Orders</span>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+					<div class="card-box noradius noborder bg-warning">
+						<i class="fa fa-bar-chart float-right text-white"></i>
+						<h6 class="text-white text-uppercase m-b-20">Visitors</h6>
+						<h1 class="m-b-20 text-white counter">250</h1>
+						<span class="text-white">Bounce rate: 25%</span>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+					<div class="card-box noradius noborder bg-info">
+						<i class="fa fa-user-o float-right text-white"></i>
+						<h6 class="text-white text-uppercase m-b-20">Users</h6>
+						<h1 class="m-b-20 text-white counter">120</h1>
+						<span class="text-white">25 New Users</span>
+					</div>
+				</div>
+
+			</div>
+			<!-- end row -->
+
+		</div>
+		<!-- END container-fluid -->
+
+	</div>
+	<!-- END content -->
+
+</div>
+<!-- END content-page -->
+
+<footer class="footer">
+	<span class="text-right">
+		Copyright <a target="_blank" href="#">Your Website</a>
+	</span>
+	<span class="float-right">
+		Powered by <a target="_blank" href="https://www.pikeadmin.com"><b>Pike Admin</b></a>
+	</span>
+</footer>
+
+
+@section scripts {
+	<script src="~/assets/admin/assets/js/modernizr.min.js"></script>
+	<script src="~/assets/admin/js/jquery.min.js"></script>
+	<script src="assets/js/moment.min.js"></script>
+
+	<script src="~/assets/admin/js/popper.min.js"></script>
+	<script src="~/assets/admin/js/bootstrap.min.js"></script>
+
+	<script src="~/assets/admin/js/detect.js"></script>
+	<script src="~/assets/admin/js/fastclick.js"></script>
+	<script src="~/assets/admin/js/jquery.blockUI.js"></script>
+	<script src="~/assets/admin/js/jquery.nicescroll.js"></script>
+
+	<!-- App js -->
+	<script src="~/assets/admin/js/pikeadmin.js"></script>
+
+	<!-- BEGIN Java Script for this page -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+	<!-- Counter-Up-->
+	<script src="~/assets/admin/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script src="~/assets/admin/plugins/counterup/jquery.counterup.min.js"></script>
+
+
+
+}
