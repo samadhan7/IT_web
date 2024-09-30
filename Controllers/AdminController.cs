@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace GTL.Controllers
 {
@@ -15,13 +16,16 @@ namespace GTL.Controllers
         private readonly ILogger<AdminController> _logger;
         private readonly ILogin _loginRepository;
         private readonly IConfiguration _configuration;
+		private readonly IJobs _jobsRepository;
 
-        public AdminController(ILogin userRepository, IConfiguration configuration, ILogger<AdminController> logger)
+		public AdminController(IJobs jobs, ILogin userRepository, IConfiguration configuration, ILogger<AdminController> logger)
         {
             _loginRepository = userRepository;
             _configuration = configuration;
             _logger = logger;
-        }
+            _jobsRepository = jobs;
+
+		}
 
         [ActionName("Index")]
         public IActionResult Index()
@@ -48,10 +52,10 @@ namespace GTL.Controllers
                 if (response.ResponseCode == 0)
                 {
                     var claims = new List<Claim>
-            {
-                new Claim("ID", request.UserId ?? ""),
-                new Claim(ClaimTypes.Role, response.Role ?? "")
-            };
+                    {
+                        new Claim("ID", request.UserId ?? ""),
+                        new Claim(ClaimTypes.Role, response.Role ?? "")
+                    };
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -82,7 +86,12 @@ namespace GTL.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Dashboard()
         {
-            ClaimsPrincipal currentUser = User;
+
+			Response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+			Response.Headers.Add("Pragma", "no-cache"); // HTTP 1.0.
+			Response.Headers.Add("Expires", "0"); // Proxies.
+
+			ClaimsPrincipal currentUser = User;
             var claims = currentUser.Claims;
             var roleClaim = claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")?.Value;
 
@@ -124,11 +133,45 @@ namespace GTL.Controllers
 		{
 			return View();
 		}
+
+		[Authorize(Roles = "Admin")]
+        [HttpPost]
+		public async Task<IActionResult> Openings([FromBody] Job jobData)
+        {
+            if (string.IsNullOrWhiteSpace(jobData.jobName))
+            {
+                return Json(new { success = false, message = "Job Name is required." });
+            }
+            if (string.IsNullOrWhiteSpace(jobData.jobDescription))
+            {
+                return Json(new { success = false, message = "Job Description is required." });
+            }
+            if (string.IsNullOrWhiteSpace(jobData.location))
+            {
+                return Json(new { success = false, message = "Job location is required." });
+            }
+            if (string.IsNullOrWhiteSpace(jobData.experience))
+            {
+                return Json(new { success = false, message = "Job Experience is required." });
+            }
+            if (jobData.status != 0 && jobData.status != 1)
+            {
+                return Json(new { success = false, message = "Status is required." });
+            }
+
+
+			string resultMessage = await _jobsRepository.AddJobAsync(jobData);
+
+			return Json(new { success = true, message = resultMessage });
+
+		}
+
 		[Authorize(Roles = "Admin")]
 		public IActionResult Applications()
 		{
 			return View();
 		}
+
 		[Authorize(Roles = "Admin")]
 		public IActionResult Inquiries()
 		{

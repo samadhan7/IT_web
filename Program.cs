@@ -16,7 +16,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ILogin, Login>();
-
+builder.Services.AddScoped<IApplication, Application>();
+builder.Services.AddScoped<IJobs, Jobs>();
 
 builder.Services.AddMvc();
 

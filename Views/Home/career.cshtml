@@ -55,7 +55,7 @@
 				<h2>Career</h2>
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb justify-content-center">
-						<li class="breadcrumb-item"><a href="@Url.Action("", "Home")">Home</a></li>
+						<li class="breadcrumb-item"><a href="@Url.Action("")">Home</a></li>
 						<li class="breadcrumb-item text-white" aria-current="page">Career</li>
 					</ol>
 				</nav>
@@ -121,6 +121,15 @@
 		<!--/ container end -->
 	</section>
 	<!--/ Main container end -->
+	@if (TempData["ResponseMessage"] != null)
+	{
+		<div class="alert alert-warning alert-dismissible mt-2" role="alert">
+			@TempData["ResponseMessage"]
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	}
 
 	<div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
@@ -132,32 +141,34 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form method="post" action="@Url.Action("Career")" id="applicationForm" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="name">Name</label>
-							<input type="text" class="form-control" id="name" required>
+							<input type="text" class="form-control" name="name" id="Name" required>
 						</div>
 						<div class="form-group">
 							<label for="contact">Contact No.</label>
-							<input type="tel" class="form-control" id="contact" required>
+							<input type="text" class="form-control" name="contact" id="Contact" required>
 						</div>
 						<div class="form-group">
 							<label for="resume">Resume/CV</label>
-							<input type="file" class="form-control-file" id="resume" required>
+							<input type="file" class="form-control-file" name="resume" id="Resume" required>
 						</div>
 						<div class="form-group">
 							<label for="address">Address</label>
-							<input type="text" class="form-control" id="address" required>
+							<input type="text" class="form-control" name="address" id="Address" required>
 						</div>
 						<div class="form-group">
 							<label for="email">Email</label>
-							<input type="email" class="form-control" id="email" required>
+							<input type="email" class="form-control" name="email" id="Email" required>
 						</div>
 						<div class="form-group">
 							<label for="coverLetter">Cover Letter</label>
-							<textarea class="form-control" id="coverLetter" rows="3" required></textarea>
+							<textarea class="form-control" id="coverLetter" name="CoverLetter" rows="3"></textarea>
 						</div>
 						<button type="submit" class="btn btn-primary">Submit Application</button>
+						<div class="alert alert-dismissible " id="responseMessage"></div>
+						
 					</form>
 				</div>
 			</div>
@@ -313,6 +324,38 @@
 			console.log(jobTitle);
 			var modal = $(this);
 			modal.find('#modalJobTitle').text(jobTitle);
+		});
+
+		$(document).ready(function () {
+			$('#applicationForm').on('submit', function (event) {
+				event.preventDefault();
+
+				var formData = new FormData(this);
+
+				var submitButton = $(this).find('button[type=submit]');
+				submitButton.prop('disabled', true).text('Submitting...');
+
+				$.ajax({
+					url: $(this).attr('action'),
+					type: 'POST',
+					data: formData,
+					contentType: false,
+					processData: false, 
+					success: function (response) {
+						
+						$('#responseMessage').text(response.message);
+					},
+					error: function (xhr, status, error) {
+						
+						$('#responseMessage').text("Error submitting application: " + error);
+					},
+					complete: function () {
+						
+						submitButton.prop('disabled', false).text('Submit Application');
+						// $('#applicationForm')[0].reset();
+					}
+				});
+			});
 		});
 
 	</script>

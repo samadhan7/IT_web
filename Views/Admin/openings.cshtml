@@ -5,6 +5,8 @@
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 	ViewData["Title"] = "Openings";
 }
+@Html.AntiForgeryToken()
+
 
 <!-- top bar navigation -->
 <div class="headerbar">
@@ -128,8 +130,9 @@
 
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 					<div class="card mb-3">
-						<div class="card-header">
+						<div class="card-header d-flex justify-content-between align-items-center">
 							<h3><i class="fa fa-users"></i> Openings</h3>
+							<button class="btn btn-danger" data-toggle="modal" data-target="#addJobModal">Add New Job</button>
 						</div>
 
 						<div class="card-body">
@@ -205,6 +208,53 @@
 
 </div>
 <!-- END content-page -->
+<!-- Modal -->
+<div class="modal fade" id="addJobModal" tabindex="-1" role="dialog" aria-labelledby="addJobModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addJobModalLabel">Add New Job</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="jobForm">
+					<div class="form-group">
+						<label for="jobName">Job Name</label>
+						<input type="text" class="form-control" id="jobName" name="jobName">
+					</div>
+					<div class="form-group">
+						<label for="jobDescription">Job Description</label>
+						<textarea class="form-control" id="jobDescription" name="jobDescription"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="location">Location</label>
+						<input type="text" class="form-control" id="location" name="location">
+					</div>
+					<div class="form-group">
+						<label for="experience">Experience</label>
+						<input type="text" class="form-control" id="experience" name="experience">
+					</div>
+					<div class="form-group">
+						<label for="status">Status</label>
+						<select class="form-control" id="status" name="status">
+							<option value="1">Active</option>
+							<option value="0">Inactive</option>
+						</select>
+					</div>
+					<!-- Add more fields as necessary -->
+				</form>
+				<div id="required" class="text-danger"></div>
+			</div>
+			<div class="modal-footer">
+				
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" id="saveJobButton">Save Job</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <footer class="footer">
 	<span class="text-right">
@@ -250,6 +300,57 @@
 			$('.counter').counterUp({
 				delay: 10,
 				time: 600
+			});
+		});
+
+		$(document).ready(function () {
+			$('#saveJobButton').click(function (event) {
+				event.preventDefault();
+
+				var submitButton = $(this).find('#saveJobButton');
+
+				$('#required').text('');
+
+				var jName = $('#jobName').val().trim();
+				var jDescription = $('#jobDescription').val().trim();
+				var locatio = $('#location').val().trim();
+				var experienc = $('#experience').val().trim();
+				var statu = $('#status').val();
+
+				if (!jName || !jDescription || !locatio || !experienc || !statu) {
+					$('#required').text('All fields are required. Please fill them out.');
+					return;
+				}
+
+				var jobData = {
+					jobName: jName,
+					jobDescription: jDescription,
+					location: locatio,
+					experience: experienc,
+					status: parseInt(statu) // Ensure status is an integer
+				};
+
+
+				console.log(jobData); // Log to check the structure before sending
+
+				$.ajax({
+					url: '@Url.Action("Openings")',
+					type: 'POST',
+					data: JSON.stringify(jobData), // Convert to JSON string
+					contentType: 'application/json',
+					success: function (response) {
+						$('#required').text(response.message);
+						submitButton.prop('disabled', false).text('Save Job');
+						if (response.success) {
+							location.reload();
+						}
+					},
+					error: function (xhr, status, error) {
+						$('#required').text("Error :" + response.message);
+						submitButton.prop('disabled', false).text('Save Job');
+					}
+				});
+
 			});
 		});
 	</script>
