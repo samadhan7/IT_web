@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GTL.Controllers
 {
@@ -129,9 +130,74 @@ namespace GTL.Controllers
             }
         }
 		[Authorize(Roles = "Admin")]
-		public IActionResult Openings()
+		public async Task<IActionResult> Openings()
 		{
-			return View();
+			try
+			{
+				
+				var data = await _jobsRepository.GetJobsAsync();
+
+				ViewBag.JobData = data;
+	
+
+				return View();
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while retrieving jobs data.");
+				throw;
+			}
+			
+		}
+
+		[Authorize(Roles = "Admin")]
+		[HttpDelete]
+		public async Task<IActionResult> Openings(int id)
+		{
+			try
+			{
+				// Call your repository method to delete the job by ID
+				bool result = await _jobsRepository.DeleteJobAsync(id);
+
+				if (result)
+				{
+					return Json(new { success = true, message = "Job deleted successfully." });
+				}
+				else
+				{
+					return Json(new { success = false, message = "Job not found." });
+				}
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while deleting jobs data.");
+				return Json(new { success = false, message = "Internal Server Error." });
+			}
+		}
+
+		[Authorize(Roles = "Admin")]
+		[HttpPut]
+		public async Task<IActionResult> Openings([FromBody] Job jobData, int id)
+		{
+			try
+			{
+				// Call your repository method to delete the job by ID
+				bool result = await _jobsRepository.UpdateJobAsync(jobData);
+
+				if (result)
+				{
+					return Json(new { success = true, message = "Job Updated successfully." });
+				}
+				else
+				{
+					return Json(new { success = false, message = "Job not found." });
+				}
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while Updating jobs data.");
+				return Json(new { success = false, message = "Internal Server Error." });
+			}
 		}
 
 		[Authorize(Roles = "Admin")]

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GTL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfcf57b3f5a98eba60b98a6c701cdcf374d3270e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+30a7a36b0ff3999252feb8e849e15530d9e5c78f")]
 [assembly: System.Reflection.AssemblyProductAttribute("GTL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GTL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

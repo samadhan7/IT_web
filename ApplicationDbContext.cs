@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GTL.Models;
+using Microsoft.EntityFrameworkCore;
 namespace GTL
 {
     public class ApplicationDbContext : DbContext
@@ -9,7 +10,7 @@ namespace GTL
             this.Database.SetCommandTimeout(300);
         }
 
-
+        public DbSet<Job> Jobs { get; set; }
 
     }
 }

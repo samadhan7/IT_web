@@ -47,8 +47,70 @@ namespace GTL.Repo.Class
 			}
 		}
 
-	
+		public async Task<IEnumerable<Job>> GetJobsAsync()
+		{
+			try
+			{
+				var JobData = await _context.Jobs
+											.FromSqlRaw("EXEC [dbo].[GetJobs]")
+											.ToListAsync();
+
+				return JobData;
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while retrieving jobs.");
+				throw;
+			}
+		}
+
+		public async Task<bool> DeleteJobAsync(int jobId)
+		{
+			var successParam = new SqlParameter("@Success", SqlDbType.Bit) { Direction = ParameterDirection.Output };
+			var jobIdParam = new SqlParameter("@JobId", jobId);
+
+			try
+			{
+				await _context.Database.ExecuteSqlRawAsync("EXEC [dbo].DeleteJob @JobId, @Success OUTPUT", jobIdParam, successParam);
+
+				return (bool)successParam.Value;
+			}
+			catch (Exception ex)
+			{
+				// Log the error or handle it as needed
+				throw;
+			}
+		}
+
+		public async Task<bool> UpdateJobAsync(Job job)
+		{
+			try
+			{
+				var jidParam = new SqlParameter("@Jid", job.id.HasValue ? (object)job.id.Value : DBNull.Value);
+				var jNameParam = new SqlParameter("@JName", job.jobName ?? (object)DBNull.Value);
+				var jDescriptionParam = new SqlParameter("@JDescription", job.jobDescription ?? (object)DBNull.Value);
+				var locationParam = new SqlParameter("@Location", job.location ?? (object)DBNull.Value);
+				var statusParam = new SqlParameter("@Status", job.status == 1 ? (object)1 : (object)0);
+				var experienceParam = new SqlParameter("@Experience", job.experience ?? (object)DBNull.Value);
 
 
+				var successParam = new SqlParameter("@Success", SqlDbType.Bit) { Direction = ParameterDirection.Output };
+
+				await _context.Database.ExecuteSqlRawAsync(
+				   "EXEC [dbo].[UpdateJob] @Jid, @JName, @JDescription, @Location, @Status, @Experience, @Success OUTPUT",
+				   jidParam, jNameParam, jDescriptionParam, locationParam, statusParam, experienceParam, successParam
+			   );
+
+				
+				 return (bool)successParam.Value;
+
+
+			}
+			catch (Exception ex)
+			{
+				throw;
+
+			}
+		}
 	}
 }
