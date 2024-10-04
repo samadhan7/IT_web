@@ -98,18 +98,34 @@
 
 			<div class="row">
 				<div class="col-lg-7">
-					<form id="contact-form" action="" method="post" role="form">
+					<form id="contact-form" action="@Url.Action("Contactform")" method="post" role="form">
+						@if (TempData["Response"] != null)
+						{
+							<div class="alert alert-warning alert-dismissible mt-2" role="alert">
+								@TempData["Response"]
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						}
 						<div class="row">
+							
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>Name</label>
-									<input class="form-control" name="name" id="name" placeholder="" type="text" required>
+									<input class="form-control" name="name" id="name" placeholder="" type="text" >
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>Email</label>
-									<input class="form-control" name="email" id="email" placeholder="" type="email" required>
+									<input class="form-control" name="email" id="email" placeholder="" type="email" >
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Contact</label>
+									<input class="form-control" name="contact" id="contact" placeholder="" type="number" required>
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -127,6 +143,7 @@
 							<br>
 							<button class="btn btn-outline-primary  blank" type="submit">Send Message</button>
 						</div>
+						
 					</form>
 				</div>
 				<div class="col-lg-5">

@@ -4,7 +4,7 @@
 }
 @{
 	var ApplicationsList = ViewBag.ApplicationsData as IEnumerable<Applications>;
-	var ResponseMessage = ViewBag.ResponseMessage;
+
 }
 
 <!-- top bar navigation -->
@@ -114,13 +114,6 @@
 						</ol>
 						<div class="clearfix"></div>
 					</div>
-					@if (ResponseMessage != null && ResponseMessage.Any())
-					{
-						<div class="alert alert-warning" role="alert">
-							@ResponseMessage
-						</div>
-					}
-					
 				</div>
 			</div>
 			<!-- end row -->
@@ -245,7 +238,7 @@
 
 			// counter-up
 			$('.counter').counterUp({
-				delay: 5,
+				delay: 10,
 				time: 600
 			});
 		});

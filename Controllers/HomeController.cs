@@ -11,14 +11,15 @@ namespace GTL.Controllers
 		private readonly IApplication _application;
 		private readonly IWebHostEnvironment _hostingEnvironment;
 		private readonly IJobs _jobsRepository;
+		private readonly IInquiry _inquiryRepository;
 
-		public HomeController(IJobs jobs, IApplication application, IWebHostEnvironment hostingEnvironment,ILogger<HomeController> logger)
+		public HomeController(IInquiry inquiry, IJobs jobs, IApplication application, IWebHostEnvironment hostingEnvironment,ILogger<HomeController> logger)
         {
             _logger = logger;
 			_application = application;
 			_hostingEnvironment = hostingEnvironment;
 			_jobsRepository = jobs;
-
+			_inquiryRepository = inquiry;
 		}
 
         [Route("")]
@@ -149,7 +150,74 @@ namespace GTL.Controllers
 		{
 			return View();
 		}
+		[ActionName("Contactform")]
+		[HttpPost]
+		public async Task<IActionResult> Contact(Inquiry inquiry)
+		{
+			if (string.IsNullOrWhiteSpace(inquiry.name))
+			{
+				TempData["Response"] = "Name is required.";
+				return RedirectToAction("Contact");
 
+			}
+
+			// Validate Email
+			if (string.IsNullOrWhiteSpace(inquiry.email) || !IsValidEmail(inquiry.email))
+			{
+				TempData["Response"] = "Valid email is required.";
+				return RedirectToAction("Contact");
+
+			}
+			if (string.IsNullOrWhiteSpace(inquiry.contact) || inquiry.contact.Length != 10 || !inquiry.contact.All(char.IsDigit))
+			{
+
+			
+				var ResponseMessage = "Contact number is invalid enter valid one.";
+
+				TempData["Response"] = ResponseMessage;
+				return RedirectToAction("Contact");
+
+			}
+			if (string.IsNullOrWhiteSpace(inquiry.subject))
+			{
+				TempData["Response"] = "Subject is required.";
+				return RedirectToAction("Contact");
+			}
+
+			// Validate Message
+			if (string.IsNullOrWhiteSpace(inquiry.message))
+			{
+				TempData["Response"] = "Message is required.";
+				return RedirectToAction("Contact");
+			}
+			try
+			{
+				var ResponseMessage = await _inquiryRepository.AddInquiryAsync(inquiry);
+				TempData["Response"] = ResponseMessage;
+
+				return RedirectToAction("Contact");
+			}
+			catch(Exception ex)
+			{
+				TempData["Response"] = "Server Error :"+ ex;
+				
+			}
+			return RedirectToAction("Contact");
+
+		}
+
+		private bool IsValidEmail(string email)
+		{
+			try
+			{
+				var addr = new System.Net.Mail.MailAddress(email);
+				return addr.Address == email;
+			}
+			catch
+			{
+				return false;
+			}
+		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

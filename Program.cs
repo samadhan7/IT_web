@@ -1,4 +1,5 @@
 using GTL;
+using GTL.Models;
 using GTL.Repo.Class;
 using GTL.Repo.Interface;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<ILogin, Login>();
 builder.Services.AddScoped<IApplication, Application>();
 builder.Services.AddScoped<IJobs, Jobs>();
+builder.Services.AddScoped<IInquiry, Inquiries>();
 
 builder.Services.AddMvc();
 
