@@ -77,7 +77,6 @@ namespace GTL.Repo.Class
 			}
 			catch (Exception ex)
 			{
-				// Log the error or handle it as needed
 				throw;
 			}
 		}

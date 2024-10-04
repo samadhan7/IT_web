@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hF0SyzK1uLGmncYwbkb3zHq7kdQkGmM/TpnI4CpHdIY=",
+  "Hash": "alGTwFCWJN6MfETdpT0GF5p82LkjlJDIaqEAyF/bCTg=",
   "Source": "GTL",
   "BasePath": "_content/GTL",
   "Mode": "Default",
@@ -23748,12 +23748,12 @@
       "OriginalItemSpec": "wwwroot\\assets\\public\\plugins\\wow.min.js"
     },
     {
-      "Identity": "C:\\Users\\Samadhan\\source\\repos\\GTL_Web\\GTL\\wwwroot\\assets\\public\\uploads\\4332db33-be3d-449e-acf2-7e703e076757.jpg",
+      "Identity": "C:\\Users\\Samadhan\\source\\repos\\GTL_Web\\GTL\\wwwroot\\assets\\public\\uploads\\5f975867-f8e1-4c4e-a600-23d8596f8577.jpg",
       "SourceId": "GTL",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Samadhan\\source\\repos\\GTL_Web\\GTL\\wwwroot\\",
       "BasePath": "_content/GTL",
-      "RelativePath": "assets/public/uploads/4332db33-be3d-449e-acf2-7e703e076757.jpg",
+      "RelativePath": "assets/public/uploads/5f975867-f8e1-4c4e-a600-23d8596f8577.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -23764,15 +23764,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\public\\uploads\\4332db33-be3d-449e-acf2-7e703e076757.jpg"
+      "OriginalItemSpec": "wwwroot\\assets\\public\\uploads\\5f975867-f8e1-4c4e-a600-23d8596f8577.jpg"
     },
     {
-      "Identity": "C:\\Users\\Samadhan\\source\\repos\\GTL_Web\\GTL\\wwwroot\\assets\\public\\uploads\\68b2bfc7-e011-407f-97ec-a1651204fb14.jpg",
+      "Identity": "C:\\Users\\Samadhan\\source\\repos\\GTL_Web\\GTL\\wwwroot\\assets\\public\\uploads\\855795fb-cfa7-473e-805f-0f5762553825.pdf",
       "SourceId": "GTL",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Samadhan\\source\\repos\\GTL_Web\\GTL\\wwwroot\\",
       "BasePath": "_content/GTL",
-      "RelativePath": "assets/public/uploads/68b2bfc7-e011-407f-97ec-a1651204fb14.jpg",
+      "RelativePath": "assets/public/uploads/855795fb-cfa7-473e-805f-0f5762553825.pdf",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -23783,7 +23783,45 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\public\\uploads\\68b2bfc7-e011-407f-97ec-a1651204fb14.jpg"
+      "OriginalItemSpec": "wwwroot\\assets\\public\\uploads\\855795fb-cfa7-473e-805f-0f5762553825.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\Samadhan\\source\\repos\\GTL_Web\\GTL\\wwwroot\\assets\\public\\uploads\\da0c7386-8d55-4db4-9d06-f9f848c0029d.pdf",
+      "SourceId": "GTL",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Samadhan\\source\\repos\\GTL_Web\\GTL\\wwwroot\\",
+      "BasePath": "_content/GTL",
+      "RelativePath": "assets/public/uploads/da0c7386-8d55-4db4-9d06-f9f848c0029d.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\public\\uploads\\da0c7386-8d55-4db4-9d06-f9f848c0029d.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\Samadhan\\source\\repos\\GTL_Web\\GTL\\wwwroot\\assets\\public\\uploads\\dade3d78-35d8-4b50-b1a2-6ffd148e93ec.jpg",
+      "SourceId": "GTL",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Samadhan\\source\\repos\\GTL_Web\\GTL\\wwwroot\\",
+      "BasePath": "_content/GTL",
+      "RelativePath": "assets/public/uploads/dade3d78-35d8-4b50-b1a2-6ffd148e93ec.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\public\\uploads\\dade3d78-35d8-4b50-b1a2-6ffd148e93ec.jpg"
     },
     {
       "Identity": "C:\\Users\\Samadhan\\source\\repos\\GTL_Web\\GTL\\wwwroot\\assets\\public\\videos\\video.mp4",

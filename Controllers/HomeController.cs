@@ -2,8 +2,6 @@ using GTL.Models;
 using GTL.Repo.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Data;
-using System.IO;
 
 namespace GTL.Controllers
 {
@@ -12,12 +10,14 @@ namespace GTL.Controllers
         private readonly ILogger<HomeController> _logger;
 		private readonly IApplication _application;
 		private readonly IWebHostEnvironment _hostingEnvironment;
+		private readonly IJobs _jobsRepository;
 
-		public HomeController(IApplication application, IWebHostEnvironment hostingEnvironment,ILogger<HomeController> logger)
+		public HomeController(IJobs jobs, IApplication application, IWebHostEnvironment hostingEnvironment,ILogger<HomeController> logger)
         {
             _logger = logger;
 			_application = application;
 			_hostingEnvironment = hostingEnvironment;
+			_jobsRepository = jobs;
 
 		}
 
@@ -46,9 +46,23 @@ namespace GTL.Controllers
 		}
 
 		[Route("Career")]
-		public IActionResult Career()
+		public async Task<IActionResult> Career()
 		{
-			return View();
+			try
+			{
+
+				var data = await _jobsRepository.GetJobsAsync();
+
+				ViewBag.JobData = data;
+
+
+				return View();
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while retrieving jobs data.");
+				throw;
+			}
 		}
 
 		[Route("Career")]
@@ -57,6 +71,7 @@ namespace GTL.Controllers
 		{
 			applications.Resume = null;
 
+			// Validate input fields
 			if (string.IsNullOrWhiteSpace(applications.Name))
 			{
 				return Json(new { success = false, message = "Name is required." });
@@ -77,34 +92,35 @@ namespace GTL.Controllers
 			{
 				return Json(new { success = false, message = "Resume is required." });
 			}
-
 			if (resume.Length > 10 * 1024 * 1024)
 			{
 				return Json(new { success = false, message = "Resume must be less than 10MB." });
 			}
 
+			var allowedExtensions = new[] { ".jpg", ".jpeg", ".pdf" };
+			var fileExtension = Path.GetExtension(resume.FileName).ToLower();
 
-			if (resume != null && resume.Length > 0)
+			if (!allowedExtensions.Contains(fileExtension))
 			{
-				// Validate file extension
-				var allowedExtensions = new[] { ".jpg", ".jpeg", ".pdf" };
-				var fileExtension = Path.GetExtension(resume.FileName).ToLower();
+				return Json(new { success = false, message = "Invalid file type. Only .jpg, .jpeg, and .pdf files are allowed." });
+			}
 
-				if (!allowedExtensions.Contains(fileExtension))
+
+			bool resultMessage = await _application.CheckApplicationAsync(applications.Email,applications.Contact);
+
+			if (!resultMessage) 
+			{
+				
+				var resumeFolderPath = Path.Combine("wwwroot", "assets", "public", "uploads");
+
+				if (!Directory.Exists(resumeFolderPath))
 				{
-					return Json(new { success = false, message = "Invalid file type. Only .jpg, .jpeg, and .pdf files are allowed." });
-				}
-
-				var resumeFolderPath = Path.Combine("wwwroot","assets","public","uploads");
-
-				if (!Directory.Exists(resumeFolderPath)) {
-
 					Directory.CreateDirectory(resumeFolderPath);
 				}
-				
 
-					var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
-					var filePath = Path.Combine(resumeFolderPath, uniqueFileName);
+				var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
+
+				var filePath = Path.Combine(resumeFolderPath, uniqueFileName);
 
 				try
 				{
@@ -113,22 +129,19 @@ namespace GTL.Controllers
 						await resume.CopyToAsync(stream);
 					}
 
-				}
-				catch (Exception ex) {
-					return Json(new { success = false, message = "Error while uploading file :"+ ex });
-				}
-					
-
 					applications.Resume = filePath;
 
-					string resultMessage = await _application.AddApplicationAsync(applications);
+					var result = await _application.AddApplicationAsync(applications);
 
-					return Json(new { success = true, message = resultMessage });
-
+					return Json(new { success = true, message = result });
+				}
+				catch (Exception ex)
+				{
+					return Json(new { success = false, message = "Error while uploading file: " + ex.Message });
+				}
 			}
 
-			return Json(new { success = false, message = "Server Error try again" });
-
+			return Json(new { success = false, message = "Application already exists wait for the response." });
 		}
 
 		[Route("Contact")]

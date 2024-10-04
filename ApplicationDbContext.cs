@@ -11,6 +11,7 @@ namespace GTL
         }
 
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<Applications> applications{get; set;}
 
     }
 }

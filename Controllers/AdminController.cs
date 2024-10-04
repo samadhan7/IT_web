@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GTL.Controllers
 {
@@ -18,13 +17,15 @@ namespace GTL.Controllers
         private readonly ILogin _loginRepository;
         private readonly IConfiguration _configuration;
 		private readonly IJobs _jobsRepository;
+        private readonly IApplication _applicationRepo;
 
-		public AdminController(IJobs jobs, ILogin userRepository, IConfiguration configuration, ILogger<AdminController> logger)
+		public AdminController(IApplication application, IJobs jobs, ILogin userRepository, IConfiguration configuration, ILogger<AdminController> logger)
         {
             _loginRepository = userRepository;
             _configuration = configuration;
             _logger = logger;
             _jobsRepository = jobs;
+            _applicationRepo = application;
 
 		}
 
@@ -233,9 +234,48 @@ namespace GTL.Controllers
 		}
 
 		[Authorize(Roles = "Admin")]
-		public IActionResult Applications()
+
+		public async Task<ActionResult> Applications()
 		{
-			return View();
+			try
+			{
+
+                var data = await _applicationRepo.GetApplicationsAsync();
+
+				ViewBag.ApplicationsData = data;
+
+
+				return View();
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while retrieving applications data.");
+				throw;
+			}
+		}
+
+		[Authorize(Roles = "Admin")]
+		[HttpDelete]
+		public async Task<ActionResult> Applications(int Id)
+		{
+			try
+			{
+
+				string data = await _applicationRepo.DeleteApplicationAsync(Id);
+
+
+
+				return Json(new { success = true, message = data });
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while deleting applications data.");
+				ViewBag.ResponseMessage = "An error occurred while deleting applications data :" + ex;
+
+
+				return Json(new { success = false, message = "An error occurred while deleting applications data :" + ex });
+
+			}
 		}
 
 		[Authorize(Roles = "Admin")]
