@@ -20,6 +20,7 @@ builder.Services.AddScoped<ILogin, Login>();
 builder.Services.AddScoped<IApplication, Application>();
 builder.Services.AddScoped<IJobs, Jobs>();
 builder.Services.AddScoped<IInquiry, Inquiries>();
+builder.Services.AddScoped<IUser, Users>();
 
 builder.Services.AddMvc();
 

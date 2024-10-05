@@ -1,8 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewData["Title"] = "Inquiries";
-
-    var InquiryList = ViewBag.InquiryData as IEnumerable<Inquiry>;
+    ViewData["Title"] = "Profile";
 }
 
 <!-- top bar navigation -->
@@ -64,7 +62,7 @@
 
 			<ul>
 				<li class="submenu">
-					<a href="@Url.Action("Dashboard","admin")"><i class="fa fa-fw fa-tachometer"></i><span> Dashboard </span> </a>
+					<a class="active"  href="@Url.Action("Dashboard","admin")"><i class="fa fa-fw fa-tachometer"></i><span> Dashboard </span> </a>
 				</li>
 
 				<li class="submenu">
@@ -76,7 +74,7 @@
 				</li>
 
 				<li class="submenu">
-					<a class="active" href="@Url.Action("Inquiries","admin")"><i class="fa fa-fw fa-envelope"></i><span> Manage Inquiries </span> </a>
+					<a  href="@Url.Action("Inquiries","admin")"><i class="fa fa-fw fa-envelope"></i><span> Manage Inquiries </span> </a>
 				</li>
 
 
@@ -105,10 +103,10 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="breadcrumb-holder">
-						<h1 class="main-title float-left">Inquiries</h1>
+						<h1 class="main-title float-left">Profile</h1>
 						<ol class="breadcrumb float-right">
 							<li class="breadcrumb-item">Home</li>
-							<li class="breadcrumb-item active">Inquiries</li>
+							<li class="breadcrumb-item active">Profile</li>
 						</ol>
 						<div class="clearfix"></div>
 					</div>
@@ -124,59 +122,36 @@
 
 			<div class="row">
 
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
 					<div class="card mb-3">
 						<div class="card-header">
-							<h3><i class="fa fa-envelope"></i> Inquiries</h3>
+							<h3><i class="fa fa-envelope"></i> Profile</h3>
 						</div>
 
 						<div class="card-body">
 
-							<table id="example1" class="table table-bordered table-responsive-xl table-hover display">
-								<thead>
-									<tr>
-										<th>ID</th>
-										<th>Name</th>
-										<th>Email</th>
-										<th>Contact</th>
-										<th>Subject</th>
-										<th>Message</th>
-										<th>Date</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									@if (InquiryList != null && InquiryList.Any())
-									{
-										foreach (var item in InquiryList)
-										{
-											<tr>
-												<td>@item.id</td>
-												<td>@item.name</td>
-												<td>@item.email</td>
-												<td>@item.contact</td>
-												<td>@item.subject</td>
-												<td>@item.message</td>
-												<td>@item.last_modified</td>
-
-												<td>
-													<button class="btn btn-danger" onclick="confirmDelete('@item.id')">
-														<i class="fa fa-trash"></i>
-													</button>
-												</td>
-												
-											</tr>
-										}
-									}
-									else
-									{
-										<tr>
-											<td colspan="8" class="text-center">No inquiries data available.</td>
-										</tr>
-									} 
-								</tbody>
-							</table>
-
+							<form id="updateProfileForm" action="@Url.Action("Profile")" method="post">
+								<input type="hidden" name="id" value="@ViewBag.Userid">
+								<div class="form-group col-6">
+									<label for="email">Email</label>
+									<input type="email" class="form-control" id="email" value="@ViewBag.UserEmail" name="email" required>
+								</div>
+								<div class="form-group col-6">
+									<label for="password">Password</label>
+									<input type="text" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+								</div>
+								<button type="submit" class="btn btn-primary">Update</button>
+								@if (TempData["Response"] != null)
+								{
+									<div class="alert alert-warning alert-dismissible mt-2" role="alert">
+										@TempData["Response"]
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+								}
+							</form>
+							
 						</div>
 					</div><!-- end card-->
 				</div>
@@ -229,37 +204,9 @@
 	<script src="~/assets/admin/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
 	<script src="~/assets/admin/plugins/counterup/jquery.counterup.min.js"></script>
 	<script>
-		$(document).ready(function () {
-			// data-tables
-			$('#example1').DataTable();
-
-			// counter-up
-			$('.counter').counterUp({
-				delay: 10,
-				time: 600
-			});
-		});
-		function confirmDelete(inquiryId) {
-			if (confirm("Are you sure you want to delete this inquiry?")){
-
-				$.ajax({
-					url: '@Url.Action("Inquiries")?Id=' + inquiryId,
-					type: 'DELETE',
-					success: function (response) {
-						if (response.success) {
-							location.reload();
-						} else {
-							alert(response.message);
-						}
-					},
-					error: function (xhr, status, error) {
-						alert("An error occurred while deleting the application: " + error);
-					}
-				});
+		
 
 
-			}
-		}
 	</script>
 
 

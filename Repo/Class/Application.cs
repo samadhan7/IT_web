@@ -37,28 +37,6 @@ namespace GTL.Repo.Class
 			}
 		}
 
-		//public async Task<string> DeleteApplicationAsync(int id)
-		//{
-			
-
-
-		//	var successParam = new SqlParameter("@Success", SqlDbType.NVarChar, 256) { Direction = ParameterDirection.Output };
-		//	var IdParam = new SqlParameter("@Id", id);
-
-		//	try
-		//	{
-		//		await _context.Database.ExecuteSqlRawAsync("EXEC [dbo].DeleteApplication @Id, @Success OUTPUT", IdParam, successParam);
-
-		//		var ResponseMessage = successParam.Value == DBNull.Value ? string.Empty : (string)successParam.Value;
-
-		//		return ResponseMessage;
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		throw;
-		//	}
-		//}
-
 
 		public async Task<string> DeleteApplicationAsync(int id)
 		{

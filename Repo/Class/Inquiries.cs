@@ -54,5 +54,39 @@ namespace GTL.Repo.Class
 			}
 
 		}
+
+		public async Task<bool> DeleteInquiryAsync(int Id)
+		{
+			var successParam = new SqlParameter("@Success", SqlDbType.Bit) { Direction = ParameterDirection.Output };
+			var IdParam = new SqlParameter("@Id", Id);
+
+			try
+			{
+				await _context.Database.ExecuteSqlRawAsync("EXEC [dbo].[DeleteInquiry] @Id, @Success OUTPUT", IdParam, successParam);
+
+				return (bool)successParam.Value;
+			}
+			catch (Exception ex)
+			{
+				throw;
+			}
+		}
+
+		public async Task<IEnumerable<Inquiry>> GetInquiriesAsync()
+		{
+			try
+			{
+				var InquiriesData = await _context.inquiries
+											.FromSqlRaw("EXEC [dbo].[GetInquiries]")
+											.ToListAsync();
+
+				return InquiriesData;
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while retrieving inquiries.");
+				throw;
+			}
+		}
 	}
 }

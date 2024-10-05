@@ -52,7 +52,7 @@ namespace GTL.Controllers
 			try
 			{
 
-				var data = await _jobsRepository.GetJobsAsync();
+				var data = await _jobsRepository.GetJobsAsyncActive();
 
 				ViewBag.JobData = data;
 

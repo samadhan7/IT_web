@@ -111,5 +111,22 @@ namespace GTL.Repo.Class
 
 			}
 		}
+
+		public async Task<IEnumerable<Job>> GetJobsAsyncActive()
+		{
+			try
+			{
+				var JobData = await _context.Jobs
+											.FromSqlRaw("EXEC [dbo].[GetJobsCareer]")
+											.ToListAsync();
+
+				return JobData;
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while retrieving active jobs.");
+				throw;
+			}
+		}
 	}
 }

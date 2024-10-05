@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace GTL.Controllers
 {
@@ -18,14 +18,18 @@ namespace GTL.Controllers
         private readonly IConfiguration _configuration;
 		private readonly IJobs _jobsRepository;
         private readonly IApplication _applicationRepo;
+		private readonly IInquiry _inquiryRepo;
+		private readonly IUser _userRepo;
 
-		public AdminController(IApplication application, IJobs jobs, ILogin userRepository, IConfiguration configuration, ILogger<AdminController> logger)
+		public AdminController(IUser user,IInquiry inquiry, IApplication application, IJobs jobs, ILogin userRepository, IConfiguration configuration, ILogger<AdminController> logger)
         {
             _loginRepository = userRepository;
             _configuration = configuration;
             _logger = logger;
             _jobsRepository = jobs;
             _applicationRepo = application;
+			_inquiryRepo = inquiry;
+			_userRepo = user;
 
 		}
 
@@ -55,8 +59,9 @@ namespace GTL.Controllers
                 {
                     var claims = new List<Claim>
                     {
-                        new Claim("ID", request.UserId ?? ""),
-                        new Claim(ClaimTypes.Role, response.Role ?? "")
+						new Claim("ID", response.UserId.HasValue ? response.UserId.Value.ToString() : string.Empty),
+						new Claim(ClaimTypes.Email, request.email),
+						new Claim(ClaimTypes.Role, response.Role ?? "")
                     };
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -89,9 +94,9 @@ namespace GTL.Controllers
         public IActionResult Dashboard()
         {
 
-			Response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-			Response.Headers.Add("Pragma", "no-cache"); // HTTP 1.0.
-			Response.Headers.Add("Expires", "0"); // Proxies.
+			Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate"; // HTTP 1.1.
+			Response.Headers["Pragma"] = "no-cache"; // HTTP 1.0.
+			Response.Headers["Expires"] = "0";
 
 			ClaimsPrincipal currentUser = User;
             var claims = currentUser.Claims;
@@ -133,6 +138,9 @@ namespace GTL.Controllers
 		[Authorize(Roles = "Admin")]
 		public async Task<IActionResult> Openings()
 		{
+			Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate"; // HTTP 1.1.
+			Response.Headers["Pragma"] = "no-cache"; // HTTP 1.0.
+			Response.Headers["Expires"] = "0";
 			try
 			{
 				
@@ -182,7 +190,7 @@ namespace GTL.Controllers
 		{
 			try
 			{
-				// Call your repository method to delete the job by ID
+
 				bool result = await _jobsRepository.UpdateJobAsync(jobData);
 
 				if (result)
@@ -237,6 +245,9 @@ namespace GTL.Controllers
 
 		public async Task<ActionResult> Applications()
 		{
+			Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate"; // HTTP 1.1.
+			Response.Headers["Pragma"] = "no-cache"; // HTTP 1.0.
+			Response.Headers["Expires"] = "0";
 			try
 			{
 
@@ -279,9 +290,103 @@ namespace GTL.Controllers
 		}
 
 		[Authorize(Roles = "Admin")]
-		public IActionResult Inquiries()
+		public async Task<ActionResult> Inquiries()
 		{
+			Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate"; // HTTP 1.1.
+			Response.Headers["Pragma"] = "no-cache"; // HTTP 1.0.
+			Response.Headers["Expires"] = "0";
+			try
+			{
+
+				var data = await _inquiryRepo.GetInquiriesAsync();
+
+				ViewBag.InquiryData = data;
+
+
+				return View();
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while retrieving inquiries data.");
+				throw;
+			}
+		}
+
+		[Authorize(Roles = "Admin")]
+		[HttpDelete]
+		public async Task<ActionResult> Inquiries(int Id)
+		{
+			try
+			{
+
+				bool data = await _inquiryRepo.DeleteInquiryAsync(Id);
+
+				if (!data) { 
+					var response2 = "Somthing went wrong while deleting inquiry.";
+					return Json(new { success = true, message = response2 });
+				}
+				var response = "Inquiry Deleted.";
+				return Json(new { success = true, message = response });
+
+
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while deleting inquiry data.");
+				var ResponseMessage = "An error occurred while deleting inquiry data :" + ex;
+
+
+				return Json(new { success = false, message = ResponseMessage });
+
+			}
+		}
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult Profile()
+		{
+			Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate"; // HTTP 1.1.
+			Response.Headers["Pragma"] = "no-cache"; // HTTP 1.0.
+			Response.Headers["Expires"] = "0";
+
+			var emailClaim = User.FindFirst(ClaimTypes.Email);
+			string userEmail = emailClaim != null ? emailClaim.Value : "Email not found";
+
+			var idClaim = User.FindFirst("ID");
+
+
+			string userid = idClaim != null ? idClaim.Value : "id not found";
+
+
+			ViewBag.UserEmail = userEmail;
+			ViewBag.Userid = userid;
+
 			return View();
+
+
+		}
+		[Authorize(Roles = "Admin")]
+		[HttpPost]
+		public async Task<IActionResult> Profile(string email,string password,int id)
+		{
+
+			try
+			{
+				string ResponseMessage = await _userRepo.UpdateUserAsync(email, password, id);
+
+
+				TempData["Response"] = ResponseMessage;
+
+				return RedirectToAction("Profile");
+
+
+			}
+			catch(Exception ex)
+			{
+				_logger.LogError(ex, "An error occurred while updating user data.");
+				TempData["Response"] = "An error occurred: " + ex.Message;
+				return RedirectToAction("Profile");
+			}
+			
 		}
 
 
