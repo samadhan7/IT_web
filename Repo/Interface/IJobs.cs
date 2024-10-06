@@ -9,6 +9,6 @@ namespace GTL.Repo.Interface
 
 		Task<bool> DeleteJobAsync(int Id);
 		Task<bool> UpdateJobAsync(Job jobData);
-		Task<IEnumerable<Job>> GetJobsAsyncActive();
+		Task<IEnumerable<Job>> GetJobsAsyncActive(int pageNumber,int pageSize);
 	}
 }

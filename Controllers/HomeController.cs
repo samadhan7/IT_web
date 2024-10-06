@@ -1,6 +1,7 @@
 using GTL.Models;
 using GTL.Repo.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace GTL.Controllers
@@ -12,14 +13,16 @@ namespace GTL.Controllers
 		private readonly IWebHostEnvironment _hostingEnvironment;
 		private readonly IJobs _jobsRepository;
 		private readonly IInquiry _inquiryRepository;
+		private readonly ApplicationDbContext _context;
 
-		public HomeController(IInquiry inquiry, IJobs jobs, IApplication application, IWebHostEnvironment hostingEnvironment,ILogger<HomeController> logger)
+		public HomeController(ApplicationDbContext applicationDbContext,IInquiry inquiry, IJobs jobs, IApplication application, IWebHostEnvironment hostingEnvironment,ILogger<HomeController> logger)
         {
             _logger = logger;
 			_application = application;
 			_hostingEnvironment = hostingEnvironment;
 			_jobsRepository = jobs;
 			_inquiryRepository = inquiry;
+			_context = applicationDbContext;
 		}
 
         [Route("")]
@@ -47,15 +50,17 @@ namespace GTL.Controllers
 		}
 
 		[Route("Career")]
-		public async Task<IActionResult> Career()
+		public async Task<IActionResult> Career(int pageNumber = 1, int pageSize = 10)
 		{
 			try
 			{
-
-				var data = await _jobsRepository.GetJobsAsyncActive();
-
+				var data = await _jobsRepository.GetJobsAsyncActive(pageNumber, pageSize);
 				ViewBag.JobData = data;
 
+				// Get total count of jobs for pagination controls
+				var totalJobs = await _context.Jobs.CountAsync(j => j.status == 1);
+				ViewBag.TotalPages = (int)Math.Ceiling((double)totalJobs / pageSize);
+				ViewBag.CurrentPage = pageNumber;
 
 				return View();
 			}
@@ -65,6 +70,8 @@ namespace GTL.Controllers
 				throw;
 			}
 		}
+
+
 
 		[Route("Career")]
 		[HttpPost]

@@ -112,15 +112,17 @@ namespace GTL.Repo.Class
 			}
 		}
 
-		public async Task<IEnumerable<Job>> GetJobsAsyncActive()
+		public async Task<IEnumerable<Job>> GetJobsAsyncActive(int pageNumber, int pageSize)
 		{
 			try
 			{
-				var JobData = await _context.Jobs
-											.FromSqlRaw("EXEC [dbo].[GetJobsCareer]")
-											.ToListAsync();
+				var jobs = await _context.Jobs
+					.FromSqlRaw("EXEC [dbo].[GetJobsCareer] @PageNumber, @PageSize",
+						new SqlParameter("@PageNumber", pageNumber),
+						new SqlParameter("@PageSize", pageSize))
+					.ToListAsync();
 
-				return JobData;
+				return jobs;
 			}
 			catch (Exception ex)
 			{
