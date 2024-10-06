@@ -22,7 +22,6 @@ namespace GTL.Repo.Class
 			{
 				var EmailParam = new SqlParameter("@Email", email ?? (object)DBNull.Value);
 				var ContactParam = new SqlParameter("@Contact", phone ?? (object)DBNull.Value);
-
 				var ExistsParam = new SqlParameter("@Exists", SqlDbType.Bit) { Direction = ParameterDirection.Output };
 
 				await _context.Database.ExecuteSqlRawAsync(
@@ -108,6 +107,11 @@ namespace GTL.Repo.Class
 				_logger.LogError(ex, "An error occurred while retrieving applications.");
 				throw;
 			}
+		}
+
+		public Task<int> GetApplicationsCountAsync()
+		{
+			throw new NotImplementedException();
 		}
 
 		async Task<string> IApplication.AddApplicationAsync(Applications applications)

@@ -7,5 +7,7 @@ namespace GTL.Repo.Interface
 		Task<string> AddInquiryAsync(Inquiry inquiry);
 		Task<IEnumerable<Inquiry>> GetInquiriesAsync();
 		Task<bool> DeleteInquiryAsync(int Id);
+
+		Task<int> GetInquiriesCountAsync();
 	}
 }

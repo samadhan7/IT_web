@@ -10,5 +10,7 @@ namespace GTL.Repo.Interface
 
 		Task<IEnumerable<Applications>> GetApplicationsAsync();
 		Task<string> DeleteApplicationAsync(int id);
+		Task<int> GetApplicationsCountAsync();
+		
 	}
 }

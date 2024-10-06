@@ -130,5 +130,10 @@ namespace GTL.Repo.Class
 				throw;
 			}
 		}
+
+		public Task<int> GetOpeningsCountAsync()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

@@ -50,17 +50,17 @@ namespace GTL.Controllers
 		}
 
 		[Route("Career")]
-		public async Task<IActionResult> Career(int pageNumber = 1, int pageSize = 10)
+		public async Task<IActionResult> Career(int page = 1, int pageSize = 10)
 		{
 			try
 			{
-				var data = await _jobsRepository.GetJobsAsyncActive(pageNumber, pageSize);
+				var data = await _jobsRepository.GetJobsAsyncActive(page, pageSize);
 				ViewBag.JobData = data;
 
-				// Get total count of jobs for pagination controls
+
 				var totalJobs = await _context.Jobs.CountAsync(j => j.status == 1);
 				ViewBag.TotalPages = (int)Math.Ceiling((double)totalJobs / pageSize);
-				ViewBag.CurrentPage = pageNumber;
+				ViewBag.CurrentPage = page;
 
 				return View();
 			}
@@ -157,6 +157,8 @@ namespace GTL.Controllers
 		{
 			return View();
 		}
+
+
 		[ActionName("Contactform")]
 		[HttpPost]
 		public async Task<IActionResult> Contact(Inquiry inquiry)

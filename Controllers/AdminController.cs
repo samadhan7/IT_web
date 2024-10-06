@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
+using OfficeOpenXml;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace GTL.Controllers
@@ -20,8 +23,10 @@ namespace GTL.Controllers
         private readonly IApplication _applicationRepo;
 		private readonly IInquiry _inquiryRepo;
 		private readonly IUser _userRepo;
+		private readonly ApplicationDbContext _context;
+		
 
-		public AdminController(IUser user,IInquiry inquiry, IApplication application, IJobs jobs, ILogin userRepository, IConfiguration configuration, ILogger<AdminController> logger)
+		public AdminController(ApplicationDbContext applicationDbContext,IUser user,IInquiry inquiry, IApplication application, IJobs jobs, ILogin userRepository, IConfiguration configuration, ILogger<AdminController> logger)
         {
             _loginRepository = userRepository;
             _configuration = configuration;
@@ -30,6 +35,7 @@ namespace GTL.Controllers
             _applicationRepo = application;
 			_inquiryRepo = inquiry;
 			_userRepo = user;
+			_context = applicationDbContext;
 
 		}
 
@@ -104,7 +110,17 @@ namespace GTL.Controllers
 
 
             ViewBag.Role = roleClaim;
-            return View();
+
+			//int openingsCount = await _jobsRepository.GetOpeningsCountAsync();
+			//int applicationsCount = await _applicationRepo.GetApplicationsCountAsync();
+			//int inquiriesCount = await _inquiryRepo.GetInquiriesCountAsync();
+
+
+			//ViewBag.OpeningsCount = openingsCount;
+			//ViewBag.ApplicationsCount = applicationsCount;
+			//ViewBag.InquiriesCount = inquiriesCount;
+
+			return View();
         }
 
         [ActionName("Logout")]
@@ -241,12 +257,137 @@ namespace GTL.Controllers
 
 		}
 
+
+		[Authorize(Roles = "Admin")]
+		[ActionName("UploadExcel")]
+		[HttpPost]
+		public async Task<IActionResult> Openings(IFormFile excelFile)
+		{
+			var ResponseMessage = "";
+
+			var allowedExtensions = new[] { ".excel", ".xls", ".xlsx" };
+			var fileExtension = Path.GetExtension(excelFile.FileName).ToLower();
+
+			if (!allowedExtensions.Contains(fileExtension) || excelFile == null)
+			{
+				 ResponseMessage = "Invalid file type. Only .excel, .xls, and .xlsx files are allowed.";
+				TempData["Response"] = ResponseMessage;
+
+				return RedirectToAction("Openings");
+			}
+
+			try {
+
+				using (var stream = new MemoryStream())
+				{
+					await excelFile.CopyToAsync(stream);
+					var jobRecords = ReadExcelFile(stream); // Implement this method to read from Excel
+
+					foreach (var job in jobRecords)
+					{
+						// Check if the job already exists
+						var existingJob = await _context.Jobs.FirstOrDefaultAsync(j => j.jobName == job.jobName);
+						if (existingJob == null)
+						{
+							// Insert new job record
+							await _jobsRepository.AddJobAsync(job);
+						}
+					}
+				}
+
+				ResponseMessage = "Records Inserted Successfully.";
+
+				TempData["Response"] = ResponseMessage;
+				return RedirectToAction("Openings");
+			}
+			catch (Exception ex) 
+			{
+				ResponseMessage = "Server Error :"+ex.Message;
+				TempData["Response"] = ResponseMessage;
+				return RedirectToAction("Openings");
+			}
+		
+		}
+
+		[ActionName("DownloadExcel")]
+		public async Task<IActionResult> DownloadExcel()
+		{
+			var jobList = await _jobsRepository.GetJobsAsync();
+			using (var package = new ExcelPackage())
+			{
+				var worksheet = package.Workbook.Worksheets.Add("Job Openings");
+
+				// Add header row
+				worksheet.Cells[1, 1].Value = "ID";
+				worksheet.Cells[1, 2].Value = "Job Name";
+				worksheet.Cells[1, 3].Value = "Job Description";
+				worksheet.Cells[1, 4].Value = "Location";
+				worksheet.Cells[1, 5].Value = "Experience";
+				worksheet.Cells[1, 6].Value = "Status";
+
+				// Add data rows
+				for (int i = 0; i < jobList.Count(); i++)
+				{
+					var job = jobList.ElementAt(i);
+					worksheet.Cells[i + 2, 1].Value = job.id;
+					worksheet.Cells[i + 2, 2].Value = job.jobName;
+					worksheet.Cells[i + 2, 3].Value = job.jobDescription;
+					worksheet.Cells[i + 2, 4].Value = job.location;
+					worksheet.Cells[i + 2, 5].Value = job.experience;
+					worksheet.Cells[i + 2, 6].Value = (job.status == 1 ? "Active" : "Inactive");
+				}
+
+				// Set content type and filename
+				var stream = new MemoryStream();
+				package.SaveAs(stream);
+				stream.Position = 0;
+
+
+				return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "JobOpenings.xlsx");
+			}
+
+
+		}
+
+
+			private List<Job> ReadExcelFile(Stream stream)
+		{
+			var jobs = new List<Job>();
+
+			using (var package = new ExcelPackage(stream))
+			{
+				var worksheet = package.Workbook.Worksheets.FirstOrDefault();
+				if (worksheet != null)
+				{
+					int rowCount = worksheet.Dimension.Rows;
+
+					for (int row = 2; row <= rowCount; row++) // Assuming first row is header
+					{
+						var job = new Job
+						{
+							jobName = worksheet.Cells[row, 1].Text,
+							jobDescription = worksheet.Cells[row, 2].Text,
+							location = worksheet.Cells[row, 3].Text,
+							experience = worksheet.Cells[row, 4].Text,
+							status = worksheet.Cells[row, 5].Text == "Active" ? 1 : 0 // Assuming status is in column 5
+						};
+
+						jobs.Add(job);
+					}
+				}
+			}
+
+			return jobs;
+		}
+
+
+
 		[Authorize(Roles = "Admin")]
 
 		public async Task<ActionResult> Applications()
 		{
-			Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate"; // HTTP 1.1.
-			Response.Headers["Pragma"] = "no-cache"; // HTTP 1.0.
+			Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+			Response.Headers["Pragma"] = "no-cache";
 			Response.Headers["Expires"] = "0";
 			try
 			{

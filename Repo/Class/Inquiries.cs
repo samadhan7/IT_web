@@ -88,5 +88,10 @@ namespace GTL.Repo.Class
 				throw;
 			}
 		}
+
+		public Task<int> GetInquiriesCountAsync()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

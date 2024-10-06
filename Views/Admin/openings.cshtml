@@ -135,9 +135,20 @@
 						<div class="card-header d-flex justify-content-between align-items-center">
 							<h3><i class="fa fa-users"></i> Openings</h3>
 							<button class="btn btn-danger" data-toggle="modal" data-target="#addJobModal">Add New Job</button>
+							<button class="btn btn-primary" data-toggle="modal" data-target="#uploadExcelModal">Upload Excel</button>
+							<a class="btn btn-success" href="@Url.Action("DownloadExcel")">Download Excel</a>
 						</div>
 
 						<div class="card-body">
+							@if (TempData["Response"] != null)
+							{
+								<div class="alert alert-warning alert-dismissible mt-2" role="alert">
+									@TempData["Response"]
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							}
 
 							<table id="example1" class="table table-bordered table-responsive-xl table-hover display">
 								<thead>
@@ -204,6 +215,28 @@
 
 </div>
 <!-- END content-page -->
+<!-- Modal -->
+<div class="modal fade" id="uploadExcelModal" tabindex="-1" role="dialog" aria-labelledby="uploadExcelModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="uploadExcelModalLabel">Upload Excel File</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="uploadExcelForm" action="@Url.Action("UploadExcel")" method="POST" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="excelFile">Choose Excel File</label>
+						<input type="file" class="form-control-file" name="excelFile" id="excelFile" accept=".xls,.xlsx" required>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 
 <!-- Update Modal -->
 <div class="modal fade" id="updateJobModal" tabindex="-1" role="dialog" aria-labelledby="updateJobModalLabel" aria-hidden="true">
@@ -348,6 +381,9 @@
 				time: 600
 			});
 		});
+
+
+			
 
 		// Open modal and populate fields
 		$(document).on('click', '.update-btn', function () {
