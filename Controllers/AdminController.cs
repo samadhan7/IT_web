@@ -97,7 +97,7 @@ namespace GTL.Controllers
 
 
         [Authorize(Roles = "Admin")]
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
 
 			Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate"; // HTTP 1.1.
@@ -111,14 +111,15 @@ namespace GTL.Controllers
 
             ViewBag.Role = roleClaim;
 
-			//int openingsCount = await _jobsRepository.GetOpeningsCountAsync();
-			//int applicationsCount = await _applicationRepo.GetApplicationsCountAsync();
-			//int inquiriesCount = await _inquiryRepo.GetInquiriesCountAsync();
+			int openingsCount = await _jobsRepository.GetOpeningsCountAsync();
+
+			int applicationsCount = await _applicationRepo.GetApplicationsCountAsync();
+			int inquiriesCount = await _inquiryRepo.GetInquiriesCountAsync();
 
 
-			//ViewBag.OpeningsCount = openingsCount;
-			//ViewBag.ApplicationsCount = applicationsCount;
-			//ViewBag.InquiriesCount = inquiriesCount;
+			ViewBag.OpeningsCount = openingsCount;
+			ViewBag.ApplicationsCount = applicationsCount;
+			ViewBag.InquiriesCount = inquiriesCount;
 
 			return View();
         }

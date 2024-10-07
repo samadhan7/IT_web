@@ -131,9 +131,24 @@ namespace GTL.Repo.Class
 			}
 		}
 
-		public Task<int> GetOpeningsCountAsync()
+		public async Task<int> GetOpeningsCountAsync()
 		{
-			throw new NotImplementedException();
+			try
+			{
+
+				var countParam = new SqlParameter("@JobCount", SqlDbType.Int) { Direction = ParameterDirection.Output };
+
+				await _context.Database.ExecuteSqlRawAsync("EXEC [CountJobs] @JobCount OUTPUT", countParam);
+
+				return (int)countParam.Value;
+
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex.Message);
+				throw;
+			}
+			
 		}
 	}
 }

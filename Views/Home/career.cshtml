@@ -76,14 +76,14 @@
 						foreach (var job in JobList)
 						{
 							<h3 id="job-name" class="title-border">@job.jobName</h3>
-							<p>@job.jobDescription</p>
+							<p id="jobdesc">@job.jobDescription</p>
 
 							<div class="accordion" id="accordion">
 								<h6>Location: @job.location</h6>
 								<h6>Experience: @job.experience</h6>
 								<div class="gap-20"></div>
 								<p>
-									<a href="javascript:void(0)" class="btn btn-outline-primary" data-toggle="modal" data-id="@job.id" data-target="#applyModal">
+									<a href="javascript:void(0)" class="btn btn-outline-primary" data-toggle="modal" data-jobtitle="@job.jobName" data-id="@job.id" data-target="#applyModal">
 										<span class="mr-2">Apply Now</span> <i class="fa fa-long-arrow-right"></i>
 									</a>
 								</p>
@@ -163,7 +163,7 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="applyModalLabel">Apply for - <span id="modalJobTitle"></span></h5>
+					<h5 class="modal-title" id="applyModalLabel">Apply for - <b><span id="modalJobTitle"></span></b></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -349,14 +349,28 @@
 	<!-- Main Script -->
 	<script src="~/assets/public/js/script.js"></script>
 	<script>
-		// When the modal is shown, update the job title in the modal
+
 		$('#applyModal').on('show.bs.modal', function (event) {
 			var button = $(event.relatedTarget);
-			var jobTitle = $('#job-name').text();
+			var jobTitle = button.data('jobtitle'); 
 			var id = button.data('id');
-			var modal = $(this);
+			var modal = $(this); 
+			
 			modal.find('#modalJobTitle').text(jobTitle);
 			modal.find('#job_id').val(id);
+		});
+
+
+		$('#applyModal').on('hidden.bs.modal', function () {
+			
+			$(this).find('input[type="text"], input[type="email"], textarea').val('');
+
+
+			$(this).find('input[type="file"]').val('');
+
+			
+			$('#responseMessage').hide();
+			$('#responseText').text('');
 		});
 
 		$(document).ready(function () {

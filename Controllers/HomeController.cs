@@ -50,7 +50,7 @@ namespace GTL.Controllers
 		}
 
 		[Route("Career")]
-		public async Task<IActionResult> Career(int page = 1, int pageSize = 10)
+		public async Task<IActionResult> Career(int page = 1, int pageSize = 3)
 		{
 			try
 			{

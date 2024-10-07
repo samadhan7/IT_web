@@ -109,9 +109,23 @@ namespace GTL.Repo.Class
 			}
 		}
 
-		public Task<int> GetApplicationsCountAsync()
+		public async Task<int> GetApplicationsCountAsync()
 		{
-			throw new NotImplementedException();
+			try
+			{
+
+				var countParam = new SqlParameter("@ApplicationsCount", SqlDbType.Int) { Direction = ParameterDirection.Output };
+
+				await _context.Database.ExecuteSqlRawAsync("EXEC [CountApplications] @ApplicationsCount OUTPUT", countParam);
+
+				return (int)countParam.Value;
+
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex.Message);
+				throw;
+			}
 		}
 
 		async Task<string> IApplication.AddApplicationAsync(Applications applications)

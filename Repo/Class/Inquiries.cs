@@ -89,9 +89,23 @@ namespace GTL.Repo.Class
 			}
 		}
 
-		public Task<int> GetInquiriesCountAsync()
+		public async Task<int> GetInquiriesCountAsync()
 		{
-			throw new NotImplementedException();
+			try
+			{
+
+				var countParam = new SqlParameter("@InquiryCount", SqlDbType.Int) { Direction = ParameterDirection.Output };
+
+				await _context.Database.ExecuteSqlRawAsync("EXEC [CountInquiry] @InquiryCount OUTPUT", countParam);
+
+				return (int)countParam.Value;
+
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex.Message);
+				throw;
+			}
 		}
 	}
 }
